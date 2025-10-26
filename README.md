@@ -33,6 +33,7 @@ mvn clean install
 mvn spring-boot:run
 
 4. Open frontend/index.html in your browser to view the site.
+   
 🤝 Contributing
 
 Fork the repository
