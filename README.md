@@ -1,24 +1,47 @@
-# Tembhurni Gram Panchayat Website
+# 🌐 Tembhurni Gram Panchayat Website
 
-A web application for Tembhurni Gram Panchayat to display events, images, videos, and town information.  
+A full-stack web application for **Tembhurni Gram Panchayat** to display events, images, videos, and town information.
 
-## 🌟 Features
+<p align="center">
+  <img src="https://img.shields.io/badge/Backend-Java%20SpringBoot-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/Frontend-HTML%2C%20CSS%2C%20JavaScript-orange?style=flat-square" />
+  <img src="https://img.shields.io/badge/Database-MySQL-lightgrey?style=flat-square" />
+  <img src="https://img.shields.io/badge/Deployment-AWS-brightgreen?style=flat-square" />
+</p>
 
-- Admin login for managing content  
-- Upload images and videos of community events  
-- Update population, construction updates, and other town data  
-- Public-facing website for visitors to view the latest updates without login  
-- Responsive frontend with clean UI  
-- Backend built using Java Spring Boot  
-- Frontend using HTML, CSS, and JavaScript  
+---
 
+## 🏛️ Project Overview
+
+The **Tembhurni Gram Panchayat Website** aims to bring local governance online by enabling easy content sharing and transparency.  
+It allows administrators to upload event photos, videos, and updates about infrastructure, population, and other important community data.
+
+Citizens can easily view this information without needing to log in.
+
+---
+
+## ✨ Features
+
+✅ Admin login for managing content  
+🖼️ Upload images and videos of community events  
+🏗️ Update population, construction progress, and town data  
+🌍 Public-facing website for all citizens (no login required)  
+💻 Responsive design with a clean user interface  
+⚙️ Backend built using Spring Boot and REST APIs  
+
+---
 
 ## 🧰 Tech Stack
 
-- **Backend:** Java Spring Boot, Maven  
-- **Frontend:** HTML, CSS, JavaScript  
-- **Database:** (Add your choice here, e.g., MySQL/PostgreSQL)  
-- **Deployment:** AWS (EC2/S3/Elastic Beanstalk)  
+| Layer | Technology |
+|-------|-------------|
+| **Backend** | Java Spring Boot, Maven |
+| **Frontend** | HTML, CSS, JavaScript |
+| **Database** | MySQL (can be changed later) |
+| **Deployment** | AWS (EC2 / S3 / Elastic Beanstalk) |
+
+---
+
 
 ## 🚀 Getting Started
 
@@ -34,15 +57,15 @@ mvn spring-boot:run
 
 4. Open frontend/index.html in your browser to view the site.
    
-🤝 Contributing
+   🤝 Contributing
 
-Fork the repository
+   Fork the repository
 
-Create a new feature branch
+   Create a new feature branch
 
-Commit your changes and push
+   Commit your changes and push
 
-Submit a Pull Request for review
+   Submit a Pull Request for review
 
 5. Scroll down and write a **commit message**, like:docs: add complete project README
 6. Click **“Commit changes”**.
