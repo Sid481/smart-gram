@@ -1,0 +1,7 @@
+/target/
+/.idea/
+/*.iml
+*.class
+node_modules/
+dist/
+.DS_Store
