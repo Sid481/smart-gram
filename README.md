@@ -25,19 +25,17 @@ A web application for Tembhurni Gram Panchayat to display events, images, videos
 1. Clone the repository:
 ```bash
 git clone git@github.com:Sid481/smart-gram.git
-2. Navigate to the backend folder and build the project:
 
+2. Navigate to the backend folder and build the project:
+```bash
 cd backend
 mvn clean install
 
-
 3. Run the Spring Boot application:
-
+```bash
 mvn spring-boot:run
 
-
 4. Open frontend/index.html in your browser to view the site.
-
 🤝 Contributing
 
 Fork the repository
