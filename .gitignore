@@ -1,7 +1,16 @@
-/target/
-/.idea/
-/*.iml
+# Java
 *.class
+*.jar
+*.war
+*.iml
+target/
+.idea/
+.vscode/
+
+# Node / Frontend
 node_modules/
 dist/
+build/
+
+# System
 .DS_Store
