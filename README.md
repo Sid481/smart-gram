@@ -1,4 +1,4 @@
-# 🌐 Tembhurni Gram Panchayat Website
+# 🌐 Smart Gram Panchayat Website
 
 A full-stack web application for **Tembhurni Gram Panchayat** to display events, images, videos, and town information.
 
