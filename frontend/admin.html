@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <!-- 🧭 Top Navigation Bar -->
+  <header class="admin-header hidden" id="adminHeader">
+    <button id="backBtn" class="nav-btn">← Back to Home</button>
+    <h1 class="admin-title">SmartGram Admin Panel</h1>
+    <button id="logoutBtn" class="nav-btn logout">Logout</button>
+  </header>
+
+  <div class="admin-container">
+    <!-- 🔒 Admin Login Card -->
+    <div class="admin-login-card" id="loginSection">
+      <h2>🔒 Admin Login</h2>
+      <input type="password" id="adminPassword" placeholder="Enter admin password">
+      <button id="loginBtn">Login</button>
+      <p id="loginMessage"></p>
+    </div>
+
+    <!-- 📤 Upload Content Card -->
+    <div class="admin-upload-card hidden" id="uploadSection">
+      <h2>📤 Upload Content</h2>
+
+      <label for="pageSelect">Select Page:</label>
+      <select id="pageSelect">
+        <option value="">-- Select Page --</option>
+        <option value="gallery">Gallery</option>
+        <option value="announcements">Notices</option>
+        <option value="schemes">Schemes</option>
+        <option value="leadership">Leadership (Members)</option>
+      </select>
+
+      <label for="categorySelect">Category:</label>
+      <select id="categorySelect">
+        <option value="">-- Select Category --</option>
+      </select>
+
+      <label for="yearSelect">Year:</label>
+      <select id="yearSelect">
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+      </select>
+
+      <label for="monthSelect">Month:</label>
+      <select id="monthSelect">
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+      </select>
+
+      <label for="fileInput">Select File (Image / PDF / Video):</label>
+      <input type="file" id="fileInput" accept="image/*,video/mp4,application/pdf">
+
+      <button id="uploadBtn">Upload</button>
+      <p id="uploadMessage"></p>
+    </div>
+
+    <!-- 🖼️ Uploaded Content Preview -->
+    <div class="uploaded-content hidden" id="previewSection">
+      <h2>📁 Uploaded Items</h2>
+      <div class="preview-grid" id="previewGrid"></div>
+    </div>
+  </div>
+
+  <!-- 🔍 Image Zoom Modal -->
+  <div id="zoomModal" class="zoom-modal hidden">
+    <span class="close-modal" id="closeModal">&times;</span>
+    <img id="zoomImage" class="zoom-image" src="" alt="">
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+/* 💰 Finance Section */
+#financeSection {
+  padding: 3rem 1.5rem;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+/* 🔹 Title */
+#financeTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 2rem;
+}
+
+/* 🔘 Filter Bar (Year, Month, Category) */
+#financeFilters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem auto;
+  padding-top: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* 🧭 Filter Dropdowns */
+#financeFilters select {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 1rem;
+  color: #1f2937;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 60; /* Fix dropdown overlap issue */
+}
+
+
+#financeFilters select:hover {
+  background-color: #f3f4f6;
+}
+
+#financeFilters select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 4px rgba(37, 99, 235, 0.3);
+}
+
+/* 📊 Finance Grid Layout */
+#financeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 💼 Finance Card Items */
+.finance-item {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.finance-item:hover {
+  transform: translateY(-4px);
+}
+
+/* 📄 PDF Links */
+.finance-item a {
+  color: #2563eb;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  word-break: break-word;
+}
+
+.finance-item a:hover {
+  text-decoration: underline;
+}
+
+/* 🖼️ Image Items */
+.finance-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  #financeFilters {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 1rem;
+  }
+
+  #financeFilters select {
+    width: 100%;
+  }
+
+  #financeTitle {
+    font-size: 1.6rem;
+  }
+}
+
+/* 🪶 Smooth Fade Animation for Cards */
+.finance-item {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🌙 Subtle Shadow Hover Effect */
+.finance-item:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+

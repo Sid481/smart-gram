@@ -2,2102 +2,358 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tembhurni Grampanchayat - Official Portal</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-
-        * {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        /* Color Theme */
-        :root {
-            --primary: #1e40af;
-            --secondary: #3b82f6;
-            --accent: #f59e0b;
-            --success: #10b981;
-            --danger: #ef4444;
-        }
-
-        /* Top Bar */
-        .top-bar {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-            animation: slideDown 0.5s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-            }
-
-            to {
-                transform: translateY(0);
-            }
-        }
-
-        /* Header */
-        .main-header {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .main-header.scrolled {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        .logo-circle {
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Navigation */
-        .nav-menu {
-            background: #ffffff;
-            border-bottom: 2px solid #e5e7eb;
-            display: flex;
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-        }
-
-        .nav-link {
-            position: relative;
-            padding: 1rem 1.0rem;
-            color: #4b5563;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            font-size: 0.875rem;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #1e40af);
-            transform: translateX(-50%);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: #1e40af;
-        }
-
-        .nav-link:hover::before {
-            width: 80%;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg,
-                    /* diagonal direction from top-left to bottom-right */
-                    #ff9933 0%,
-                    /* saffron start */
-                    #ffffff 45%,
-                    /* white middle */
-                    #138808 90%
-                    /* green end */
-                );
-            position: relative;
-            overflow: hidden;
-        }
-
-
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Added for black text in hero section */
-        .hero-content h1 {
-            color: #000;
-        }
-
-        .hero-content p {
-            color: #333;
-        }
-
-        /* Cards */
-        .card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
-        }
-
-        .card:hover::before {
-            transform: scaleX(1);
-        }
-
-        /* Icon Boxes */
-        .icon-box {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .icon-box:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-            border-color: #3b82f6;
-        }
-
-        .icon-box i {
-            transition: all 0.3s ease;
-        }
-
-        .icon-box:hover i {
-            transform: scale(1.2) rotate(5deg);
-        }
-
-        /* Buttons */
-        .btn-primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: #1e40af;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 2px solid #3b82f6;
-            cursor: pointer;
-        }
-
-        .btn-secondary:hover {
-            background: #3b82f6;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Section Headers */
-        .section-title {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 1rem;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, #f59e0b, #ef4444);
-            border-radius: 2px;
-        }
-
-        /* News Items */
-        .news-item {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            border-left: 4px solid #e5e7eb;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .news-item:hover {
-            border-left-color: #3b82f6;
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
-            transform: translateX(8px);
-        }
-
-        /* Stats Counter */
-        .stat-box {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            border-radius: 20px;
-            padding: 2rem;
-            color: white;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .stat-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
-        }
-
-        /* Gallery */
-        .gallery-item {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            background-size: cover;
-            background-position: center;
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-            opacity: 0;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: flex-end;
-            padding: 1.5rem;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        /* Forms */
-        input,
-        textarea,
-        select {
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 1rem;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
-
-        /* Footer */
-        .footer {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: white;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            animation: fadeIn 0.3s ease;
-            overflow-y: auto;
-            justify-content: center;
-            align-items: center;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .modal-content {
-            background: white;
-            margin: 5% auto;
-            padding: 2.5rem;
-            border-radius: 24px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .close {
-            color: #9ca3af;
-            float: right;
-            font-size: 32px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .close:hover {
-            color: #ef4444;
-            transform: rotate(90deg);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 80%;
-            height: 100vh;
-            background: white;
-            z-index: 9998;
-            transition: left 0.3s ease;
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .mobile-menu.active {
-            left: 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .hamburger {
-                display: block !important;
-            }
-
-            .hero h1 {
-                font-size: 2rem !important;
-            }
-
-            .section-title {
-                font-size: 1.5rem !important;
-            }
-        }
-
-        /* Animations */
-        .fade-in {
-            animation: fadeInUp 0.6s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
-
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'mr',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-    </script>
-
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tembhurni Grampanchayat | Smart Village, Empowered People</title>
+
+  <!-- ✅ SEO Meta Tags -->
+  <meta name="description"
+    content="Official website of Tembhurni Grampanchayat, Madha Taluka, Solapur District, Maharashtra. Explore schemes, projects, and citizen services for a smart and transparent village." />
+  <meta name="keywords"
+    content="Tembhurni, Grampanchayat, Solapur, Madha, Maharashtra, Rural Development, Smart Village, Government Schemes, Projects, Panchayat, Certificates, Village Portal, Transparency" />
+  <meta name="author" content="Tembhurni Grampanchayat" />
+
+  <!-- ✅ Open Graph / Social Media Preview -->
+  <meta property="og:title" content="Tembhurni Grampanchayat | Smart Village, Empowered People" />
+  <meta property="og:description"
+    content="Empowering rural development through transparency and citizen participation. Visit the official Tembhurni Grampanchayat website." />
+  <meta property="og:image" content="https://yourdomain.com/assets/images/pillar1.png" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- ✅ Favicon -->
+  <link rel="icon" href="assets/images/pillar1.png" type="image/png">
+
+  <!-- ✅ Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ✅ Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- ✅ Custom CSS & JS -->
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/script.js"></script>
+
+
+  <!-- ✅ Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,mr',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </head>
 
-<body class="bg-gray-50">
 
-    <!-- Top Bar (Matching Image 1) -->
-    <div class="top-bar text-white py-3">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap justify-between items-center text-sm">
-                <!-- Contact Info & Government Branding -->
-                <div class="flex flex-wrap items-center gap-4 mb-2 md:mb-0">
-                    <span class="flex items-center gap-2">
-                        <i class="fas fa-landmark"></i>
-                        <span class="hidden sm:inline" id="govBranding">Government of Maharashtra, RDD</span>
-                    </span>
-                    <span><i class="fas fa-phone-alt mr-2"></i>+91-XXXXXXXXXX</span>
-                    <span><i class="fas fa-envelope mr-2"></i><span
-                            id="emailContact">info@tembhurni.gov.in</span></span>
-                </div>
-                <!-- Language Toggle -->
-                <button id="langToggle"
-                    class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-full font-semibold transition">
-                    <i class="fas fa-language mr-2"></i><span id="langText">मराठी</span>
-                </button>
-                <script>
-                    document.getElementById("langToggle").addEventListener("click", function () {
-                        const frame = document.querySelector(".goog-te-menu-frame");
-                        if (frame) {
-                            const translateMenu = frame.contentDocument.querySelector(".goog-te-menu2-item span.text:contains('Marathi')") ||
-                                frame.contentDocument.querySelector("span:contains('मराठी')");
-                            if (translateMenu) translateMenu.click();
-                        } else {
-                            alert("Please wait a moment for Google Translate to load...");
-                        }
-                    });
-                </script>
+<body>
 
-            </div>
+  <!-- Top Bar (Matching Image 1) -->
+  <div class="top-bar text-white py-3">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-wrap justify-between items-center text-sm">
+        <!-- Contact Info & Government Branding -->
+        <div class="flex flex-wrap items-center gap-4 mb-2 md:mb-0">
+          <span class="flex items-center gap-2">
+            <i class="fas fa-landmark"></i>
+            <span class="hidden sm:inline" id="govBranding">Government of Maharashtra, RDD</span>
+          </span>
+          <span><i class="fas fa-phone-alt mr-2"></i>+91-XXXXXXXXXX</span>
+          <span><i class="fas fa-envelope mr-2"></i><span id="emailContact">info@tembhurni.gov.in</span></span>
         </div>
+        <!-- Admin Login Button -->
+        <div class="admin-login-container">
+          <a href="admin.html" class="login-btn">Admin Login</a>
+        </div>
+
+      </div>
+
     </div>
+  </div>
+  </div>
 
-    <!-- Main Header (Matching Image 1) -->
-    <header class="main-header sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex items-center justify-between flex-wrap gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="logo-circle w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center">
-                        <img src="pillar1.png" alt="Grampanchayat Logo" class="w-full h-full object-cover" />
+  <!-- Header -->
 
-                    </div>
-                    <div>
-                        <h1 class="text-lg md:text-2xl font-bold text-gray-800" id="headerTitle">Tembhurni Grampanchayat
-                        </h1>
-                        <p class="text-xs md:text-sm text-gray-600" id="headerSubtitle">Official Government Portal</p>
-                        <p class="text-xs text-gray-500" id="headerOwnership">Madha Taluka, Solapur District,
-                            Maharashtra</p>
-                    </div>
-                </div>
-                <!-- Search Functionality (Added for completeness, though primary nav used below) -->
-                <div class="hidden md:block">
-                    <div class="relative">
-                        <input type="search" id="siteSearch" placeholder="Search website..."
-                            class="p-2 border border-gray-300 rounded-full pl-10 text-sm focus:border-blue-500 transition">
-                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                    </div>
-                </div>
-                <button class="hamburger text-3xl text-gray-700 hidden md:hidden" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+  <!-- Header (Full Width Card Layout) -->
+  <header class="bg-white py-4 shadow-md w-full">
+    <div class="w-full bg-white border-b border-gray-200 shadow-sm">
+      <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between px-6 md:px-16 py-4">
+        <div class="flex items-center gap-4">
+          <img src="assets/images/pillar1.png" alt="Government Logo" class="w-14 h-14 md:w-16 md:h-16 object-contain" />
+          <div>
+            <h1 class="text-lg md:text-2xl font-bold text-gray-900">Tembhurni Grampanchayat</h1>
+            <p class="text-sm text-gray-700">Official Government Portal</p>
+            <p class="text-sm text-gray-600">Madha Taluka, Solapur District, Maharashtra</p>
+          </div>
         </div>
-    </header>
 
-    <!-- Navigation Menu (Updated sticky position to accommodate header height) -->
-    <nav class="nav-menu sticky top-[88px] md:top-[120px] z-40">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap justify-center overflow-x-auto whitespace-nowrap py-1">
-                <!-- Restored Navigation Links based on previous structure and PDF -->
-                <a href="#home" class="nav-link text-sm" id="navHome">Home</a>
-                <a href="#about" class="nav-link text-sm" id="navAbout">About</a>
-                <a href="#leadership" class="nav-link text-sm" id="navLeadership">Leadership</a>
-                <a href="#projects" class="nav-link text-sm" id="navProjects">Projects</a>
-                <a href="#schemes" class="nav-link text-sm" id="navSchemes">Schemes</a>
-                <a href="#transparency" class="nav-link text-sm" id="navTransparency">Finance</a>
-                <a href="#infrastructure" class="nav-link text-sm" id="navInfrastructure">Infrastructure</a>
-                <a href="#environment" class="nav-link text-sm" id="navEnvironment">Environment</a>
-                <a href="#jobs" class="nav-link text-sm" id="navJobs">Employment</a>
-                <a href="#dashboard" class="nav-link text-sm" id="navDashboard">Dashboard</a>
-                <a href="#gallery" class="nav-link text-sm" id="navGallery">Gallery</a>
-                <a href="#contact" class="nav-link text-sm" id="navContact">Contact</a>
-            </div>
-        </div>
-    </nav>
+        <!-- Search + Language -->
+        <!-- Search + Language -->
+        <div class="mt-4 sm:mt-0 flex items-center space-x-4">
 
-    <!-- Mobile Menu (Placeholder) -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="p-6">
-            <button class="text-3xl text-gray-700 mb-6" onclick="toggleMobileMenu()">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="flex flex-col space-y-4">
-                <a href="#home" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavHome">Home</a>
-                <a href="#about" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavAbout">About</a>
-                <a href="#leadership" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavLeadership">Leadership</a>
-                <a href="#projects" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavProjects">Projects</a>
-                <a href="#schemes" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavSchemes">Schemes</a>
-                <a href="#transparency" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavTransparency">Finance</a>
-                <a href="#infrastructure" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavInfrastructure">Infrastructure</a>
-                <a href="#environment" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavEnvironment">Environment</a>
-                <a href="#jobs" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavJobs">Employment</a>
-                <a href="#dashboard" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavDashboard">Dashboard</a>
-                <a href="#gallery" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavGallery">Gallery</a>
-                <a href="#contact" class="text-lg font-semibold text-gray-700 hover:text-blue-600"
-                    onclick="toggleMobileMenu()" id="mobNavContact">Contact</a>
+          <!-- Search + Language -->
+          <div class="mt-4 sm:mt-0 flex items-center space-x-4">
+
+            <!-- Search Box -->
+            <div
+              class="flex items-center bg-gray-50 border border-blue-300 rounded-full px-4 py-2 w-64 focus-within:ring-2 focus-within:ring-blue-400 transition">
+              <i class="fas fa-search text-gray-500 mr-2"></i>
+              <input id="searchInput" type="text" placeholder="Search website..."
+                class="bg-transparent outline-none flex-1 text-sm text-gray-700">
             </div>
+
+            <!-- Google Translate (Styled Like Search Box) -->
+
+            <div class="translate-container">
+              <span class="translate-label">
+                🌐 Select Language:
+              </span>
+              <div id="google_translate_element"></div>
+            </div>
+
+
+          </div>
+
+          <script>
+            // List of all your pages
+            const pages = [
+              "index.html",
+              "about.html",
+              "leadership.html",
+              "projects.html",
+              "schemes.html",
+              "transparency.html",
+              "infrastructure.html",
+              "environment.html",
+              "jobs.html",
+              "dashboard.html",
+              "gallery.html",
+              "announcements.html",
+              "contact.html",
+              "admin.html"
+            ];
+
+            // Function to fetch text from each page
+            async function fetchPageContent(url) {
+              try {
+                const response = await fetch(url);
+                const text = await response.text();
+                const temp = document.createElement("div");
+                temp.innerHTML = text;
+                return temp.textContent.toLowerCase(); // remove HTML tags
+              } catch (e) {
+                return "";
+              }
+            }
+
+            // When user presses Enter
+            document.getElementById("searchInput").addEventListener("keypress", async function (e) {
+              if (e.key === "Enter") {
+                const query = e.target.value.toLowerCase().trim();
+                let found = false;
+
+                for (const page of pages) {
+                  const content = await fetchPageContent(page);
+
+                  if (content.includes(query)) {
+                    window.location.href = page;
+                    found = true;
+                    break;
+                  }
+                }
+
+                if (!found) {
+                  alert("No matching content found. Try another word.");
+                }
+              }
+            });
+          </script>
         </div>
+      </div>
+  </header>
+
+
+  <!-- Navigation -->
+  <nav class="w-full bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-[1300px] mx-auto px-6 flex items-center justify-between py-3">
+
+      <!-- Logo -->
+      <!-- <a href="index.html" class="font-bold text-lg text-blue-700">Tembhurni GP</a> -->
+
+      <!-- Hamburger button (mobile only) -->
+      <button id="menuBtn" class="block md:hidden text-2xl focus:outline-none text-gray-700">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Menu links -->
+      <ul id="navLinks"
+        class="hidden md:flex flex-col md:flex-row md:space-x-6 absolute md:static bg-white md:bg-transparent top-16 left-0 w-full md:w-auto text-center md:text-left shadow-md md:shadow-none transition-all duration-300 ease-in-out">
+        <li><a href="index.html" class="nav-link block py-2 md:py-0 hover:text-blue-600 active">Home</a></li>
+        <li><a href="about.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">About</a></li>
+        <li><a href="leadership.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Leadership</a></li>
+        <li><a href="projects.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Projects</a></li>
+        <li><a href="schemes.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Schemes</a></li>
+        <li><a href="transparency.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Finance</a></li>
+        <!--<li><a href="infrastructure.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Infrastructure</a>-->
+        </li>
+        <!--<li><a href="environment.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Environment</a></li>
+        <li><a href="jobs.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Employment</a></li>
+        <li><a href="dashboard.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Dashboard</a></li>-->
+        <li><a href="gallery.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Gallery</a></li>
+        <li><a href="announcements.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Announcements</a></li>
+        <li><a href="contact.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Contact</a></li>
+      </ul>
     </div>
+  </nav>
+
+  <!-- Script for hamburger + active link -->
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const links = document.querySelectorAll('.nav-link');
+
+    // Toggle mobile menu
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('hidden');
+    });
+
+    // Highlight active page link
+    const currentPage = window.location.pathname.split('/').pop();
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPage) {
+        link.classList.add('text-blue-700', 'font-semibold', 'border-b-2', 'border-blue-700');
+      }
+    });
+  </script>
 
 
-    <!-- Hero Section (Matching Image 1) -->
+  <main>
+    <!-- Hero Section -->
     <section id="home" class="hero py-20 md:py-32">
-        <div class="container mx-auto px-4 hero-content text-center">
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 fade-in" id="heroTitle">Welcome to Tembhurni
-                Grampanchayat</h1>
-            <p class="text-lg md:text-2xl text-blue-100 mb-8 fade-in" id="heroSubtitle">Empowering Rural Development and
-                Transparency</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in">
-                <!-- Functionality Added: Scrolls to announcements/news section -->
-                <a href="#announcements" class="btn-primary inline-block" id="heroBtn1">Latest Updates</a>
-                <!-- Functionality Added: Scrolls to services section -->
-                <a href="#services" class="btn-secondary inline-block" id="heroBtn2">Citizen Services</a>
-            </div>
+      <div class="container mx-auto px-4 hero-content text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 fade-in" id="heroTitle">Welcome to Tembhurni
+          Grampanchayat</h1>
+        <p class="text-lg md:text-2xl text-blue-100 mb-8 fade-in" id="heroSubtitle">Empowering Rural Development and
+          Transparency</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in">
+          <!-- Functionality Added: Scrolls to announcements/news section -->
+          <a href="#announcements" class="btn-primary inline-block" id="heroBtn1">Latest Updates</a>
+          <!-- Functionality Added: Scrolls to services section -->
+          <a href="#services" class="btn-secondary inline-block" id="heroBtn2">Citizen Services</a>
         </div>
+      </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-12 bg-gradient-to-br from-blue-50 to-purple-50">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                <!-- Functionality Added: Opens Population Modal -->
-                <div class="stat-box cursor-pointer" onclick="openPopulationModal()">
-                    <div class="text-3xl md:text-5xl font-bold mb-2">5000+</div>
-                    <div class="text-sm md:text-base opacity-90" id="stat1">Population</div>
-                    <div class="text-xs opacity-75 mt-2">Click for details</div>
-                </div>
-                <div class="stat-box" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-                    <div class="text-3xl md:text-5xl font-bold mb-2">12</div>
-                    <div class="text-sm md:text-base opacity-90" id="stat2">Schemes Active</div>
-                </div>
-                <div class="stat-box" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
-                    <div class="text-3xl md:text-5xl font-bold mb-2">98%</div>
-                    <div class="text-sm md:text-base opacity-90" id="stat3">Satisfaction</div>
-                </div>
-                <!-- Functionality Added: Opens Emergency Modal -->
-                <div class="stat-box cursor-pointer" onclick="openEmergencyModal()"
-                    style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
-                    <div class="text-3xl md:text-5xl font-bold mb-2">24/7</div>
-                    <div class="text-sm md:text-base opacity-90" id="stat4">Support</div>
-                    <div class="text-xs opacity-75 mt-2">Emergency Contacts</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Quick Services -->
     <section id="services" class="py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="quickServicesTitle">Quick
-                Services</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
-                <!-- Note: All these icons/boxes need dynamic content/links to be fully functional, which is beyond static HTML/JS -->
-                <div class="icon-box text-center">
-                    <i class="fas fa-certificate text-4xl md:text-5xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold text-sm md:text-base" id="service1">Certificates</p>
-                </div>
-                <div class="icon-box text-center">
-                    <i class="fas fa-money-bill-wave text-4xl md:text-5xl text-green-600 mb-3"></i>
-                    <p class="font-semibold text-sm md:text-base" id="service2">Pay Tax</p>
-                </div>
-                <div class="icon-box text-center">
-                    <i class="fas fa-tint text-4xl md:text-5xl text-cyan-600 mb-3"></i>
-                    <p class="font-semibold text-sm md:text-base" id="service3">Water Bill</p>
-                </div>
-                <!-- Functionality Added: Scrolls to Contact/Grievance Form -->
-                <div class="icon-box text-center" onclick="scrollToContact()">
-                    <i class="fas fa-bullhorn text-4xl md:text-5xl text-red-600 mb-3"></i>
-                    <p class="font-semibold text-sm md:text-base" id="service4">Complaints</p>
-                </div>
-                <div class="icon-box text-center">
-                    <i class="fas fa-download text-4xl md:text-5xl text-purple-600 mb-3"></i>
-                    <p class="font-semibold text-sm md:text-base" id="service5">Downloads</p>
-                </div>
-                <!-- Functionality Added: Opens Emergency Modal -->
-                <div class="icon-box text-center" onclick="openEmergencyModal()">
-                    <i class="fas fa-phone-alt text-4xl md:text-5xl text-orange-600 mb-3"></i>
-                    <p class="font-semibold text-sm md:text-base" id="service6">Emergency</p>
-                </div>
-            </div>
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="quickServicesTitle">Quick
+          Services</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+          <!-- Note: All these icons/boxes need dynamic content/links to be fully functional, which is beyond static HTML/JS -->
+          <div class="icon-box text-center">
+            <i class="fas fa-certificate text-4xl md:text-5xl text-blue-600 mb-3"></i>
+            <p class="font-semibold text-sm md:text-base" id="service1">Certificates</p>
+          </div>
+          <div class="icon-box text-center">
+            <i class="fas fa-money-bill-wave text-4xl md:text-5xl text-green-600 mb-3"></i>
+            <p class="font-semibold text-sm md:text-base" id="service2">Pay Tax</p>
+          </div>
+          <div class="icon-box text-center">
+            <i class="fas fa-tint text-4xl md:text-5xl text-cyan-600 mb-3"></i>
+            <p class="font-semibold text-sm md:text-base" id="service3">Water Bill</p>
+          </div>
+          <!-- Functionality Added: Scrolls to Contact/Grievance Form -->
+          <div class="icon-box text-center" onclick="scrollToContact()">
+            <i class="fas fa-bullhorn text-4xl md:text-5xl text-red-600 mb-3"></i>
+            <p class="font-semibold text-sm md:text-base" id="service4">Complaints</p>
+          </div>
+          <div class="icon-box text-center">
+            <i class="fas fa-download text-4xl md:text-5xl text-purple-600 mb-3"></i>
+            <p class="font-semibold text-sm md:text-base" id="service5">Downloads</p>
+          </div>
+          <!-- Functionality Added: Opens Emergency Modal -->
+          <div class="icon-box text-center" onclick="openEmergencyModal()">
+            <i class="fas fa-phone-alt text-4xl md:text-5xl text-orange-600 mb-3"></i>
+            <p class="font-semibold text-sm md:text-base" id="service6">Emergency</p>
+          </div>
         </div>
+      </div>
     </section>
+  </main>
 
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="aboutTitle">About Tembhurni
-            </h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="card p-6">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-info-circle text-blue-600 text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3 text-gray-800" id="aboutIntroTitle">Introduction</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed" id="aboutIntroText">Tembhurni is a progressive
-                        village committed to rural development, transparency, and citizen welfare through modern
-                        governance.</p>
-                </div>
-                <div class="card p-6">
-                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-bullseye text-green-600 text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3 text-gray-800" id="aboutMissionTitle">Mission</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed" id="aboutMissionText">Ensure transparent
-                        governance, equitable development, and delivery of essential services to all citizens of our
-                        village.</p>
-                </div>
-                <div class="card p-6">
-                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-eye text-purple-600 text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3 text-gray-800" id="aboutVisionTitle">Vision</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed" id="aboutVisionText">A self-reliant, digitally
-                        empowered village with excellent infrastructure and quality services for everyone.</p>
-                </div>
-                <div class="card p-6">
-                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-user-tie text-orange-600 text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3 text-gray-800" id="aboutSarpanchTitle">Sarpanch Message</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed" id="aboutSarpanchText">Dedicated to serving our
-                        community with integrity and building a prosperous future together for all residents.</p>
-                </div>
-            </div>
+  <!-- Footer -->
+  <footer class="footer py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 class="font-bold text-xl mb-4" id="footerAboutTitle">About Us</h3>
+          <p class="text-gray-400 text-sm" id="footerAboutText">Tembhurni Grampanchayat is committed to
+            transparent governance and rural development. <br><br>Developed as part of the **CM Samruddha
+            Panchayat Raj Abhiyan**.</p>
         </div>
-    </section>
-
-    <!-- Leadership Section -->
-    <section id="leadership" class="py-16 bg-gradient-to-br from-orange-50 to-green-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="leadershipTitle">Our
-                Leadership (पदाधिकारी)</h2>
-
-            <!-- State Leadership (Placeholder for CM/DCM/Minister details, as per PDF) -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-center mb-8 text-gray-700" id="stateLeadershipTitle">State Government
-                    (Hierarchy)</h3>
-                <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    <div class="card p-8 text-center">
-                        <div
-                            class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-lg overflow-hidden">
-                            <img src="CM.jpeg" alt="Hon. Chief Minister" class="w-full h-full object-cover" />
-                        </div>
-                        <h4 class="font-bold text-xl mb-2 text-gray-800" id="cmTitle">Hon. Chief Minister</h4>
-                        <p class="text-gray-600 font-semibold mb-2" id="cmName">Maharashtra State</p>
-                        <p class="text-sm text-gray-500">Head of State Government (Shri. Devendra Fadnavis)</p>
-                    </div>
-
-
-                    <div class="card p-8 text-center">
-                        <div
-                            class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg overflow-hidden">
-                            <img src="DeputyCM.jpeg" alt="Hon. Deputy Chief Minister"
-                                class="w-full h-full object-cover" />
-                        </div>
-                        <h4 class="font-bold text-xl mb-2 text-gray-800" id="dcmTitle">Hon. Deputy Chief Minister</h4>
-                        <p class="text-gray-600 font-semibold mb-2" id="dcmName">Maharashtra State</p>
-                        <p class="text-sm text-gray-500">Deputy Head of State (Shri. Eknath Shinde)</p>
-                    </div>
-
-                    <div class="card p-8 text-center">
-                        <div
-                            class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg overflow-hidden">
-                            <img src="DeputyCM1.jpeg" alt="Hon. Deputy Chief Minister"
-                                class="w-full h-full object-cover" />
-                        </div>
-                        <h4 class="font-bold text-xl mb-2 text-gray-800" id="dcmTitle1">Hon. Deputy Chief Minister</h4>
-                        <p class="text-gray-600 font-semibold mb-2" id="dcmName1">Maharashtra State</p>
-                        <p class="text-sm text-gray-500">Deputy Head of State (Shri. Ajit Pawar)</p>
-                    </div>
-
-
-                    <div class="card p-8 text-center">
-                        <div
-                            class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg overflow-hidden">
-                            <img src="rdd.png" alt="Hon. Minister RDD" class="w-full h-full object-cover" />
-                        </div>
-                        <h4 class="font-bold text-xl mb-2 text-gray-800" id="ministerTitleRDD">Hon. Minister RDD</h4>
-                        <p class="text-gray-600 font-semibold mb-2" id="ministerName1">Maharashtra State</p>
-                        <p class="text-sm text-gray-500">Rural Development Minister (Shri. Jayakumar Gore)</p>
-                    </div>
-
-                    <div class="card p-8 text-center">
-                        <div
-                            class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg overflow-hidden">
-                            <img src="rdd1.png" alt="Hon. Minister RDD" class="w-full h-full object-cover" />
-                        </div>
-                        <h4 class="font-bold text-xl mb-2 text-gray-800" id="ministerTitle">Hon'ble Minister of State
-                            RDD
-                        </h4>
-                        <p class="text-gray-600 font-semibold mb-2" id="ministerName">Maharashtra State</p>
-                        <p class="text-sm text-gray-500">Rural Development and Panchayat Raj (Shri. Yogesh Kadam)</p>
-                    </div>
-
-                    <div class="card p-8 text-center">
-                        <div
-                            class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg overflow-hidden">
-                            <img src="PrincipalSecretary.png" alt="Hon. Minister RDD"
-                                class="w-full h-full object-cover" />
-                        </div>
-                        <h4 class="font-bold text-xl mb-2 text-gray-800" id="Secretary">Principal Secretary RDD
-                        </h4>
-                        <p class="text-gray-600 font-semibold mb-2" id="ministerName2">Maharashtra State</p>
-                        <p class="text-sm text-gray-500">Rural Development and Panchayat Raj (Shri. Eknath Dawale)</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Local Leadership -->
-            <div>
-                <h3 class="text-2xl font-bold text-center mb-8 text-gray-700" id="localLeadershipTitle">Village
-                    Leadership (Gram Panchayat)</h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="card p-6 text-center">
-                        <div
-                            class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-lg overflow-hidden">
-                            <img src="sarpanch.jpg" alt="Sarpanch" class="w-full h-full object-cover" />
-                        </div>
-                        <h4 class="font-bold text-lg mb-2 text-gray-800" id="sarpanchTitle">Sarpanch</h4>
-                        <p class="text-gray-600 text-sm font-semibold" id="sarpanchName">Smt. Suraja Y. Bobade</p>
-                        <p class="text-xs text-gray-500 mt-2">Village Head (Roles & Responsibilities)</p>
-                    </div>
-
-
-                    <div class="card p-6 text-center">
-                        <div
-                            class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center shadow-lg overflow-hidden">
-                            <img src="upsarpanch.jpg" alt="Up-Sarpanch" class="w-full h-full object-cover" />
-                        </div>
-                        <h4 class="font-bold text-lg mb-2 text-gray-800" id="upSarpanchTitle">Up-Sarpanch</h4>
-                        <p class="text-gray-600 text-sm font-semibold" id="upSarpanchName">Smt. Rajshree S. Newase</p>
-                        <p class="text-xs text-gray-500 mt-2">Deputy Head (Roles & Responsibilities)</p>
-                    </div>
-
-
-                    <div class="card p-6 text-center">
-                        <div
-                            class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center shadow-lg overflow-hidden">
-                            <img src="gramsevak.jpg" alt="Gram Panchayat Adhikari" class="w-full h-full object-cover" />
-                        </div>
-                        <h4 class="font-bold text-lg mb-2 text-gray-800" id="gramSevakTitle">Gram Panchayat Adhikari
-                        </h4>
-                        <p class="text-gray-600 text-sm font-semibold" id="gramSevakName">Shri. Sanjay H. Salunke</p>
-                        <p class="text-xs text-gray-500 mt-2">Gram Panchayat Officer</p>
-                    </div>
-
-
-                    <div class="card p-6 text-center">
-                        <div
-                            class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center shadow-lg">
-                            <i class="fas fa-users text-white text-4xl"></i>
-                        </div>
-                        <h4 class="font-bold text-lg mb-2 text-gray-800" id="membersTitle">Panchayat Members</h4>
-                        <p class="text-gray-600 text-sm font-semibold" id="membersCount">8 Total Members</p>
-                        <p class="text-xs text-gray-500 mt-2">View List (Wards & Details)</p>
-                    </div>
-                </div>
-            </div>
+        <div>
+          <h3 class="font-bold text-xl mb-4" id="footerLinksTitle">Quick Links</h3>
+          <div class="space-y-2 text-sm">
+            <li><a href="index.html" class="nav-link block py-2 md:py-0 hover:text-blue-600 active">Home</a></li>
+            <li><a href="about.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">About</a></li>
+            <li><a href="leadership.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Leadership</a></li>
+            <li><a href="projects.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Projects</a></li>
+            <li><a href="schemes.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Schemes</a></li>
+            <li><a href="transparency.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Finance</a></li>
+            <!--<li><a href="infrastructure.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Infrastructure</a>-->
+          </div>
         </div>
-    </section>
-
-    <!-- Key Projects & Initiatives -->
-    <section id="projects" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="projectsTitle">Key Projects &
-                Initiatives</h2>
-
-            <div class="grid lg:grid-cols-3 gap-6 mb-12">
-                <div class="card p-6 bg-yellow-50">
-                    <i class="fas fa-spinner fa-spin text-4xl text-yellow-600 mb-3"></i>
-                    <h3 class="font-bold text-xl mb-2" id="ongoingProjectTitle">Ongoing: Road Upgradation</h3>
-                    <p class="text-sm text-gray-600" id="ongoingProjectDesc">Installation of new internal village roads
-                        in Ward 3 and 4. **Progress: 60%**. Target completion: Jan 2026.</p>
-                </div>
-                <div class="card p-6 bg-green-50">
-                    <i class="fas fa-check-circle text-4xl text-green-600 mb-3"></i>
-                    <h3 class="font-bold text-xl mb-2" id="completedProjectTitle">Completed: Water Tank</h3>
-                    <p class="text-sm text-gray-600" id="completedProjectDesc">New 50,000 litre capacity water storage
-                        tank commissioned. **Cost: ₹45 Lakh**. Completed: Sep 2025.</p>
-                </div>
-                <div class="card p-6 bg-blue-50">
-                    <i class="fas fa-plus-circle text-4xl text-blue-600 mb-3"></i>
-                    <h3 class="font-bold text-xl mb-2" id="upcomingProjectTitle">Upcoming: Digital Literacy Center</h3>
-                    <p class="text-sm text-gray-600" id="upcomingProjectDesc">Proposal sanctioned for a new Digital
-                        Training and Career Guidance Center for youth.</p>
-                </div>
-            </div>
+        <div>
+          <h3 class="font-bold text-xl mb-4" id="footerLinksTitle">Quick Links</h3>
+          <div class="space-y-2 text-sm">
+            <!--<li><a href="environment.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Environment</a></li>
+            <li><a href="jobs.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Employment</a></li>
+            <li><a href="dashboard.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Dashboard</a></li>-->
+            <li><a href="gallery.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Gallery</a></li>
+            <li><a href="announcements.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Announcements</a></li>
+            <li><a href="contact.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Contact</a></li>
+          </div>
         </div>
-    </section>
-
-    <!-- Government Schemes -->
-    <section id="schemes" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="schemesTitle">Government
-                Schemes (योजना)</h2>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="card p-6">
-                    <i class="fas fa-seedling text-5xl text-green-600 mb-4"></i>
-                    <h3 class="font-bold text-xl mb-3" id="scheme1Title">Farmers Schemes</h3>
-                    <p class="text-gray-600 text-sm mb-4" id="scheme1Desc">Central/State schemes: Application Process &
-                        Eligibility details available.</p>
-                    <button class="text-blue-600 font-semibold text-sm hover:underline" id="scheme1Btn">View Schemes &
-                        Apply →</button>
-                </div>
-                <div class="card p-6">
-                    <i class="fas fa-hands-helping text-5xl text-pink-600 mb-4"></i>
-                    <h3 class="font-bold text-xl mb-3" id="scheme2Title">Women Empowerment</h3>
-                    <p class="text-gray-600 text-sm mb-4" id="scheme2Desc">Self Help Groups (SHGs) support and skill
-                        development programs.</p>
-                    <button class="text-blue-600 font-semibold text-sm hover:underline" id="scheme2Btn">View SHG Stories
-                        →</button>
-                </div>
-                <div class="card p-6">
-                    <i class="fas fa-home text-5xl text-purple-600 mb-4"></i>
-                    <h3 class="font-bold text-xl mb-3" id="scheme3Title">Housing Schemes</h3>
-                    <p class="text-gray-600 text-sm mb-4" id="scheme3Desc">State and central housing schemes for rural
-                        citizens. Check eligibility and application status.</p>
-                    <button class="text-blue-600 font-semibold text-sm hover:underline" id="scheme3Btn">Apply Now
-                        →</button>
-                </div>
-                <div class="card p-6">
-                    <i class="fas fa-user-shield text-5xl text-red-600 mb-4"></i>
-                    <h3 class="font-bold text-xl mb-3" id="scheme4Title">Insurance & Pension</h3>
-                    <p class="text-gray-600 text-sm mb-4" id="scheme4Desc">Social security schemes for Senior Citizens,
-                        Farmers, and Workers.</p>
-                    <button class="text-blue-600 font-semibold text-sm hover:underline" id="scheme4Btn">Learn More
-                        →</button>
-                </div>
-            </div>
+        <div>
+          <h3 class="font-bold text-xl mb-4" id="footerServicesTitle">Services</h3>
+          <div class="space-y-2 text-sm">
+            <a href="#" class="block hover:text-blue-400" id="footerServ1">RTS Certificates</a>
+            <a href="#" class="block hover:text-blue-400" id="footerServ2">GR & Circulars</a>
+            <a href="#" class="block hover:text-blue-400" id="footerServ3">Farmer Assistance</a>
+            <a href="#" class="block hover:text-blue-400" id="footerServ4">Water/Electricity Status</a>
+          </div>
         </div>
-    </section>
-
-    <!-- Finance & Budget Transparency (Page 4, Point 7) -->
-    <section id="transparency" class="py-16 bg-gradient-to-br from-gray-100 to-red-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="transparencyTitle">Finance &
-                Budget Transparency</h2>
-
-            <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Budget Visualizer: Where Your Rupee Goes -->
-                <div class="card p-6 bg-white">
-                    <h3 class="font-bold text-2xl mb-4 text-blue-700" id="budgetVizTitle">Where Does Your Rupee Go
-                        (Expenditure)</h3>
-                    <div
-                        class="flex items-center justify-center h-64 bg-gray-50 rounded-xl mb-4 border border-dashed border-gray-300">
-                        <div class="text-center text-sm text-gray-500" id="infographicPlaceholder">Interactive Pie Chart
-                            Visualization Placeholder</div>
-                    </div>
-                    <ul class="space-y-2 text-gray-700 text-sm">
-                        <li id="expense1"><span class="font-bold text-blue-600">40%</span> - Infrastructure & Public
-                            Works (रस्ते, पाणी)</li>
-                        <li id="expense2"><span class="font-bold text-green-600">30%</span> - Schemes & Beneficiary
-                            Welfare (योजना)</li>
-                        <li id="expense3"><span class="font-bold text-red-600">15%</span> - Education, Health &
-                            Environment</li>
-                        <li id="expense4"><span class="font-bold text-yellow-600">15%</span> - Administration &
-                            Contingency</li>
-                    </ul>
-                    <a href="#" class="block text-blue-600 font-semibold text-sm hover:underline mt-4"
-                        id="fullBudgetLink">View Full Annual Budget Summary (PDF) →</a>
-                </div>
-
-                <!-- Revenue & Grants -->
-                <div class="card p-6 bg-white">
-                    <h3 class="font-bold text-2xl mb-4 text-green-700" id="revenueTitle">Revenue & Income Sources</h3>
-                    <p class="text-sm text-gray-700 mb-4" id="revenueIntro">Breakdown of Gram Nidhi income (grants,
-                        taxes, donations):</p>
-                    <ul class="space-y-3 text-gray-700">
-                        <li class="flex justify-between items-center text-sm border-b pb-2" id="income1">
-                            <span class="font-semibold">State/Central Grants Received</span>
-                            <span class="text-green-600 font-bold">₹ 60 Lakh</span>
-                        </li>
-                        <li class="flex justify-between items-center text-sm border-b pb-2" id="income2">
-                            <span class="font-semibold">Local Tax Collection (Property/Water)</span>
-                            <span class="text-green-600 font-bold">₹ 18 Lakh</span>
-                        </li>
-                        <li class="flex justify-between items-center text-sm" id="income3">
-                            <span class="font-semibold">CSR/NGO Donations</span>
-                            <span class="text-green-600 font-bold">₹ 7 Lakh</span>
-                        </li>
-                    </ul>
-                    <a href="#" class="block text-blue-600 font-semibold text-sm hover:underline mt-6"
-                        id="rddWebsiteLink">Visit Official Audit Portal →</a>
-                </div>
-            </div>
+        <div>
+          <h3 class="font-bold text-xl mb-4" id="footerSocialTitle">Connect</h3>
+          <div class="flex gap-4">
+            <a href="#" target="_blank"
+              class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" target="_blank"
+              class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" target="_blank"
+              class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">
+              <i class="fas fa-link"></i>
+            </a>
+          </div>
         </div>
-    </section>
-
-    <!-- Infrastructure & Facilities (Page 3, Point 6) -->
-    <section id="infrastructure" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="infraTitle">Village
-                Infrastructure & Facilities</h2>
-
-            <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Facility List -->
-                <div class="card p-6">
-                    <h3 class="font-bold text-2xl mb-4 text-gray-800" id="facilitiesTitle">Key Facilities</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start text-gray-700">
-                            <i class="fas fa-hand-holding-water text-blue-500 mt-1 mr-3 text-xl"></i>
-                            <div><span class="font-semibold" id="facility1Title">Water & Sanitation:</span> <span
-                                    class="text-sm" id="facility1Desc">24/7 Water Supply, Solid Waste Management
-                                    implemented.</span></div>
-                        </li>
-                        <li class="flex items-start text-gray-700">
-                            <i class="fas fa-hospital-alt text-red-500 mt-1 mr-3 text-xl"></i>
-                            <div><span class="font-semibold" id="facility2Title">Health:</span> <span class="text-sm"
-                                    id="facility2Desc">Primary Health Sub-Center (PHSC), monthly Health & Vaccination
-                                    camps.</span></div>
-                        </li>
-                        <li class="flex items-start text-gray-700">
-                            <i class="fas fa-school text-green-500 mt-1 mr-3 text-xl"></i>
-                            <div><span class="font-semibold" id="facility3Title">Education:</span> <span class="text-sm"
-                                    id="facility3Desc">Primary School, Anganwadi Center, and Community Library
-                                    available.</span></div>
-                        </li>
-                        <li class="flex items-start text-gray-700">
-                            <i class="fas fa-bus-alt text-yellow-500 mt-1 mr-3 text-xl"></i>
-                            <div><span class="font-semibold" id="facility4Title">Connectivity:</span> <span
-                                    class="text-sm" id="facility4Desc">Main Bus Stop, Public WiFi Hotspot (limited
-                                    coverage).</span></div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Smart Village Dashboard/Map (Innovative Idea - Page 4, Point 6) -->
-                <div class="card p-6 bg-blue-50">
-                    <h3 class="font-bold text-2xl mb-4 text-blue-700" id="smartVillageTitle">Smart Village Dashboard
-                    </h3>
-                    <p class="text-sm text-gray-700 mb-4" id="smartVillageDesc">Check real-time status of critical
-                        utilities and view the village base map:</p>
-
-                    <div class="space-y-3">
-                        <div class="flex justify-between p-3 bg-white rounded-lg shadow-sm">
-                            <span class="font-semibold text-gray-700" id="metric1">Daily Water Availability</span>
-                            <span class="font-bold text-green-600" id="value1">4 Hours/Day</span>
-                        </div>
-                        <div class="flex justify-between p-3 bg-white rounded-lg shadow-sm">
-                            <span class="font-semibold text-gray-700" id="metric2">Daily Power Supply</span>
-                            <span class="font-bold text-green-600" id="value2">24 Hours</span>
-                        </div>
-                    </div>
-
-                    <button class="btn-primary w-full mt-6 text-sm py-3" id="villageMapBtn">View GIS Village Base Map
-                        →</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Environment & Sustainability (Page 5, Point 13) -->
-    <section id="environment" class="py-16 bg-gradient-to-br from-teal-50 to-green-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="environmentTitle">Environment
-                & Sustainability</h2>
-
-            <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Green Scoreboard & Campaigns (Innovative Idea - Page 6, Point 13) -->
-                <div class="card p-6 bg-white border-l-4 border-green-500">
-                    <h3 class="font-bold text-2xl mb-4 text-green-700" id="scoreboardTitle">Green Scoreboard</h3>
-                    <p class="text-sm text-gray-700 mb-4" id="scoreboardDesc">Track our progress towards a greener,
-                        cleaner village:</p>
-                    <div class="space-y-3">
-                        <div class="flex justify-between p-3 bg-green-50 rounded-lg shadow-sm" id="metric3">
-                            <span class="font-semibold text-green-800">Trees Planted YTD:</span>
-                            <span class="font-bold text-green-700">850 / 1000</span>
-                        </div>
-                        <div class="flex justify-between p-3 bg-red-50 rounded-lg shadow-sm" id="metric4">
-                            <span class="font-semibold text-red-800">Plastic-Free Compliance:</span>
-                            <span class="font-bold text-red-700">75%</span>
-                        </div>
-                    </div>
-                    <button class="btn-secondary w-full mt-6 text-sm py-3" id="adoptTreeBtn">Adopt a Tree & Monitor it
-                        →</button>
-                </div>
-
-                <!-- Eco Initiatives -->
-                <div class="card p-6 bg-white border-l-4 border-blue-500">
-                    <h3 class="font-bold text-2xl mb-4 text-blue-700" id="ecoInitiativesTitle">Eco Initiatives</h3>
-                    <ul class="space-y-3 text-gray-700">
-                        <li class="flex items-start text-sm">
-                            <i class="fas fa-tint text-blue-500 mt-1 mr-3 text-xl"></i>
-                            <span id="eco1">Rainwater Harvesting & Water Conservation efforts.</span>
-                        </li>
-                        <li class="flex items-start text-sm">
-                            <i class="fas fa-recycle text-green-500 mt-1 mr-3 text-xl"></i>
-                            <span id="eco2">Garbage Classification Scheme for dry/wet waste.</span>
-                        </li>
-                        <li class="flex items-start text-sm">
-                            <i class="fas fa-solar-panel text-yellow-500 mt-1 mr-3 text-xl"></i>
-                            <span id="eco3">Promotion of Solar Energy Schemes for households.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Employment & Education (Page 5, Point 10 & 11) -->
-    <section id="jobs" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="jobsTitle">Employment, Skills
-                & Education</h2>
-
-            <div class="grid lg:grid-cols-3 gap-8">
-                <!-- Employment & Skills -->
-                <div class="card p-6 bg-yellow-50">
-                    <i class="fas fa-tools text-4xl text-yellow-700 mb-3"></i>
-                    <h3 class="font-bold text-xl mb-3" id="skillsTitle">Local Skills & Opportunities</h3>
-                    <p class="text-sm text-gray-700 mb-4" id="skillsDesc">Find local tenders, MSME initiatives, and
-                        skill development campaigns.</p>
-                    <a href="#" class="text-blue-600 font-semibold text-sm hover:underline block mb-2"
-                        id="link1">Village Talent Directory (Talathi, Electricians, etc.) →</a>
-                    <a href="#" class="text-blue-600 font-semibold text-sm hover:underline block" id="link2">Government
-                        Employment Portal Link →</a>
-                </div>
-
-                <!-- Education & Youth Corner -->
-                <div class="card p-6 bg-blue-50">
-                    <i class="fas fa-graduation-cap text-4xl text-blue-700 mb-3"></i>
-                    <h3 class="font-bold text-xl mb-3" id="educationTitle">Education & Youth Corner</h3>
-                    <p class="text-sm text-gray-700 mb-4" id="educationDesc">Information on local schools, scholarship
-                        schemes, and career guidance programs.</p>
-                    <div class="flex justify-between text-sm text-gray-800 font-semibold p-2 bg-white rounded shadow-sm mb-2"
-                        id="youthSpeak">
-                        <span><i class="fas fa-comments mr-2"></i>Youth Speak Blogs/Reels</span>
-                    </div>
-                    <div class="flex justify-between text-sm text-gray-800 font-semibold p-2 bg-white rounded shadow-sm"
-                        id="studentMonth">
-                        <span><i class="fas fa-medal mr-2"></i>Student of the Month Honor</span>
-                    </div>
-                </div>
-
-                <!-- Farmer Support -->
-                <div class="card p-6 bg-green-50">
-                    <i class="fas fa-tractor text-4xl text-green-700 mb-3"></i>
-                    <h3 class="font-bold text-xl mb-3" id="farmerTitle">Farmer Support Center</h3>
-                    <p class="text-sm text-gray-700 mb-4" id="farmerDesc">Get crop advisories, latest market rates
-                        (बाजारभाव), and fertilizer updates.</p>
-                    <div class="flex justify-between text-sm text-gray-800 font-semibold p-2 bg-white rounded shadow-sm mb-2"
-                        id="cropPrice">
-                        <span><i class="fas fa-leaf mr-2"></i>Live Crop Prices (बाजारभाव)</span>
-                    </div>
-                    <div class="flex justify-between text-sm text-gray-800 font-semibold p-2 bg-white rounded shadow-sm"
-                        id="weatherUpdate">
-                        <span><i class="fas fa-cloud-sun-rain mr-2"></i>Weather Advisory Link</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Dashboard: "My Village, My Progress" (Page 6, Point 16) -->
-    <section id="dashboard" class="py-16 bg-gradient-to-br from-blue-50 to-indigo-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="dashboardTitle">Dashboard:
-                "My Village, My Progress"</h2>
-
-            <div class="bg-white p-8 rounded-2xl shadow-xl">
-                <h3 class="text-2xl font-bold mb-6 text-indigo-700" id="realTimeTitle">Real-time Key Indicators</h3>
-
-                <div class="grid md:grid-cols-3 gap-6 mb-8">
-                    <div class="text-center p-4 bg-indigo-50 rounded-xl border-b-4 border-indigo-500">
-                        <p class="text-xs font-semibold text-gray-600" id="indicator1Title">Sanitation Coverage</p>
-                        <p class="text-4xl font-bold text-indigo-700 mt-1">95%</p>
-                    </div>
-                    <div class="text-center p-4 bg-indigo-50 rounded-xl border-b-4 border-green-500">
-                        <p class="text-xs font-semibold text-gray-600" id="indicator2Title">Gram Nidhi Utilization</p>
-                        <p class="text-4xl font-bold text-green-700 mt-1">78%</p>
-                    </div>
-                    <div class="text-center p-4 bg-indigo-50 rounded-xl border-b-4 border-red-500">
-                        <p class="text-xs font-semibold text-gray-600" id="indicator3Title">Grievance Redressal Rate</p>
-                        <p class="text-4xl font-bold text-red-700 mt-1">92%</p>
-                    </div>
-                </div>
-
-                <!-- Achievements & Graphs -->
-                <div class="grid lg:grid-cols-2 gap-6">
-                    <div class="p-4 border border-gray-200 rounded-xl">
-                        <h4 class="font-bold text-lg mb-4 text-gray-700" id="achievementTitle">Top 5 Achievements of the
-                            Year</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-600 space-y-1" id="achievementList">
-                            <li>100% LED Street Lighting Implemented.</li>
-                            <li>Won District Award for Water Conservation.</li>
-                            <li>450+ Beneficiaries under State Housing Scheme.</li>
-                            <li>Village declared 100% Open Defecation Free (ODF).</li>
-                            <li>Digital Literacy achieved by 90% of youth.</li>
-                        </ul>
-                    </div>
-                    <div class="p-4 border border-gray-200 rounded-xl flex items-center justify-center">
-                        <div class="text-center text-gray-500" id="graphPlaceholder">Ward-wise Comparative Graph
-                            Placeholder</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- News & Announcements (Renamed Section for clarity) -->
-    <section id="announcements" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="announcementsTitle">News &
-                Gram Sabha Notices</h2>
-            <div class="grid lg:grid-cols-2 gap-6 mb-8">
-                <div class="news-item">
-                    <div class="flex items-start justify-between mb-2">
-                        <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-semibold"
-                            id="tag1">URGENT DEADLINE</span>
-                        <span class="text-gray-500 text-xs">20 Oct 2025</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2" id="news1Title">Tax Payment Final Deadline Nears</h3>
-                    <p class="text-gray-600 text-sm" id="news1Desc">The deadline for property tax payment is **November
-                        15, 2025**. Pay online or at the Gram Panchayat office.</p>
-                </div>
-                <div class="news-item">
-                    <div class="flex items-start justify-between mb-2">
-                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-semibold"
-                            id="tag2">GRAM SABHA</span>
-                        <span class="text-gray-500 text-xs">18 Oct 2025</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2" id="news2Title">Gram Sabha Meeting Notice & Agenda</h3>
-                    <p class="text-gray-600 text-sm" id="news2Desc">The next Gram Sabha meeting is scheduled for
-                        **October 25, 2025**. Download the official notice and agenda (परिपत्रक).</p>
-                </div>
-            </div>
-            <div class="card p-6 border-l-4 border-purple-500">
-                <h3 class="font-bold text-xl mb-3" id="calendarTitle">Upcoming Events Calendar</h3>
-                <p class="text-sm text-gray-600 mb-4" id="calendarDesc">View the schedule for Gram Sabha, Health Camps,
-                    and other village activities.</p>
-                <div class="flex items-center space-x-4">
-                    <i class="fas fa-calendar-alt text-3xl text-purple-600"></i>
-                    <span class="font-semibold text-gray-700" id="event1">25 Oct: Gram Sabha Meeting</span>
-                    <span class="font-semibold text-gray-700 hidden sm:inline" id="event2">| 01 Nov: Health Checkup
-                        Camp</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery (Page 6, Point 14) -->
-    <section id="gallery" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="galleryTitle">Photo & Video
-                Gallery</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <div class="gallery-item h-48 w-full rounded-xl flex flex-col items-center justify-center text-white font-bold relative overflow-hidden"
-                    style="background: linear-gradient(to bottom right, #f97316, #b91c1c);">
-                    <i class="fas fa-campground text-5xl mb-2"></i>
-                    <p class="text-lg" id="gal1">Annual Village Festival</p>
-                </div>
-
-                <div
-                    class="gallery-item h-48 w-full bg-gray-500 flex flex-col items-center justify-center text-white relative overflow-hidden rounded-xl">
-                    <div class="absolute inset-0 bg-black/40"></div> <!-- dark overlay -->
-                    <div class="relative z-10 flex flex-col items-center justify-center">
-                        <i class="fas fa-broom text-5xl mb-2"></i>
-                        <p class="font-bold" id="gal2">Shramdaan & Cleanliness</p>
-                    </div>
-                </div>
-
-
-
-
-                <div class="gallery-item h-48 bg-blue-600 flex flex-col items-center justify-center text-white">
-                    <i class="fas fa-play-circle text-5xl mb-2"></i>
-                    <p class="font-bold" id="gal3">Mini-Documentary Video</p>
-                </div>
-                <div class="gallery-item h-48 bg-purple-600 flex flex-col items-center justify-center text-white">
-                    <i class="fas fa-images text-5xl mb-2"></i>
-                    <p class="font-bold" id="gal4">Virtual Gallery (Old Photos)</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title" id="contactTitle">Contact &
-                Feedback</h2>
-            <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Grievance Redressal & Feedback Form (Page 5, Point 12) -->
-                <div class="card p-8">
-                    <h3 class="font-bold text-2xl mb-6 text-red-600" id="formTitle">Grievance & Feedback Form</h3>
-                    <form class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-semibold mb-2" id="formNameLabel">Name</label>
-                            <input type="text" id="formName" placeholder="Enter your name" class="w-full">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold mb-2" id="formTypeLabel">Type
-                                (Complaint/Suggestion)</label>
-                            <select id="formType" class="w-full">
-                                <option id="option1">Complaint (Traking ID Provided)</option>
-                                <option id="option2">Suggestion / Feedback</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold mb-2" id="formMessageLabel">Details</label>
-                            <textarea rows="4" id="formMessage" placeholder="Your detailed complaint or suggestion..."
-                                class="w-full"></textarea>
-                        </div>
-                        <!-- Functionality Added: Submit button (requires server logic, currently placeholder) -->
-                        <button type="submit" class="btn-primary w-full" id="formSubmit">Submit & Get Tracking
-                            ID</button>
-                    </form>
-                </div>
-
-                <div class="space-y-6">
-                    <!-- Main Contact Info -->
-                    <div class="card p-6">
-                        <h3 class="font-bold text-xl mb-4" id="contactInfoTitle">Gram Panchayat Office</h3>
-                        <div class="space-y-3 text-gray-700">
-                            <p><i class="fas fa-map-marker-alt text-blue-600 w-6"></i><span id="contactAddress">Near Old
-                                    Bus Stop, Tembhurni, Madha, Maharashtra - XXXXXX</span></p>
-                            <p><i class="fas fa-clock text-blue-600 w-6"></i><span id="officeHours">Office Hours:
-                                    Mon-Sat, 10:00 AM - 6:00 PM</span></p>
-                            <p><i class="fas fa-phone text-blue-600 w-6"></i>+91-XXXXXXXXXX</p>
-                            <p><i class="fas fa-envelope text-blue-600 w-6"></i>info@tembhurni.gov.in</p>
-                        </div>
-                    </div>
-
-                    <!-- Collaboration/Partnerships (Page 6, Point 15) -->
-                    <div class="card p-6 bg-green-50">
-                        <h3 class="font-bold text-xl mb-4" id="collaborateTitle">Collaborate With Us!</h3>
-                        <p class="text-sm text-gray-700 mb-4" id="collaborateText">We welcome NGOs, CSR partners, and
-                            volunteers. Join us in making Tembhurni a model village.</p>
-                        <button class="btn-secondary text-sm px-4 py-2" id="volunteerBtn">Become a Volunteer (स्वयंसेवक
-                            बना)</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="font-bold text-xl mb-4" id="footerAboutTitle">About Us</h3>
-                    <p class="text-gray-400 text-sm" id="footerAboutText">Tembhurni Grampanchayat is committed to
-                        transparent governance and rural development. <br><br>Developed as part of the **CM Samruddha
-                        Panchayat Raj Abhiyan**.</p>
-                </div>
-                <div>
-                    <h3 class="font-bold text-xl mb-4" id="footerLinksTitle">Quick Links</h3>
-                    <div class="space-y-2 text-sm">
-                        <a href="#projects" class="block hover:text-blue-400" id="footerLink1">Key Projects</a>
-                        <a href="#transparency" class="block hover:text-blue-400" id="footerLink2">Financial Reports</a>
-                        <a href="#environment" class="block hover:text-blue-400" id="footerLink3">Environment</a>
-                        <a href="#dashboard" class="block hover:text-blue-400" id="footerLink4">Dashboard</a>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="font-bold text-xl mb-4" id="footerServicesTitle">Services</h3>
-                    <div class="space-y-2 text-sm">
-                        <a href="#" class="block hover:text-blue-400" id="footerServ1">RTS Certificates</a>
-                        <a href="#" class="block hover:text-blue-400" id="footerServ2">GR & Circulars</a>
-                        <a href="#" class="block hover:text-blue-400" id="footerServ3">Farmer Assistance</a>
-                        <a href="#" class="block hover:text-blue-400" id="footerServ4">Water/Electricity Status</a>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="font-bold text-xl mb-4" id="footerSocialTitle">Connect</h3>
-                    <div class="flex gap-4">
-                        <a href="#" target="_blank"
-                            class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" target="_blank"
-                            class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" target="_blank"
-                            class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">
-                            <i class="fas fa-link"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 pt-6 text-center text-sm">
-                <p id="footerCopyright">© 2025 Tembhurni Grampanchayat. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Emergency Contacts Modal -->
-    <div id="emergencyModal" class="modal">
-        <div class="modal-content max-w-lg">
-            <span class="close" onclick="closeEmergencyModal()">&times;</span>
-            <h2 class="text-3xl font-bold mb-6 text-center text-red-700" id="emerModalTitle">Village Emergency Contacts
-            </h2>
-            <div class="space-y-4">
-                <div class="flex justify-between items-center p-4 bg-red-50 rounded-lg border-l-4 border-red-600">
-                    <p class="font-semibold" id="emer1Label"><i class="fas fa-ambulance text-red-600 mr-2"></i>Ambulance
-                        / Health Center</p>
-                    <span class="font-bold text-lg text-red-700">108</span>
-                </div>
-                <div class="flex justify-between items-center p-4 bg-blue-50 rounded-lg border-l-4 border-blue-600">
-                    <p class="font-semibold" id="emer2Label"><i class="fas fa-shield-alt text-blue-600 mr-2"></i>Police
-                        Station</p>
-                    <span class="font-bold text-lg text-blue-700">100 / 02452-XXXXXX</span>
-                </div>
-                <div class="flex justify-between items-center p-4 bg-orange-50 rounded-lg border-l-4 border-orange-600">
-                    <p class="font-semibold" id="emer3Label"><i
-                            class="fas fa-fire-extinguisher text-orange-600 mr-2"></i>Fire Department</p>
-                    <span class="font-bold text-lg text-orange-700">101</span>
-                </div>
-                <div class="flex justify-between items-center p-4 bg-purple-50 rounded-lg border-l-4 border-purple-600">
-                    <p class="font-semibold" id="emer4Label"><i class="fas fa-bolt text-purple-600 mr-2"></i>MSEB /
-                        Electricity</p>
-                    <span class="font-bold text-lg text-purple-700">1912 / 02452-YYYYYY</span>
-                </div>
-            </div>
-        </div>
+      </div>
+      <div class="border-t border-gray-700 pt-6 text-center text-sm">
+        <p id="footerCopyright">© 2025 Tembhurni Grampanchayat. All Rights Reserved.</p>
+      </div>
     </div>
-
-    <!-- Population Modal -->
-    <div id="populationModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closePopulationModal()">&times;</span>
-            <h2 class="text-3xl font-bold mb-6 text-center text-blue-700" id="popModalTitle">Population Demographics
-            </h2>
-
-            <!-- Total Population -->
-            <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-xl mb-6 text-center">
-                <div class="text-5xl font-bold mb-2">5,247</div>
-                <div class="text-xl opacity-90" id="popTotalLabel">Total Population</div>
-            </div>
-
-            <!-- Demographics Grid -->
-            <div class="grid md:grid-cols-2 gap-4 mb-6">
-                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border-l-4 border-blue-600">
-                    <div class="flex items-center justify-between mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                                <i class="fas fa-male text-white text-2xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-blue-900" id="popMenLabel">Men</h3>
-                        </div>
-                        <div class="text-3xl font-bold text-blue-700">2,687</div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm text-blue-700 font-semibold" id="popPercentage">Percentage:</span>
-                        <span class="text-lg font-bold text-blue-800">51.2%</span>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-xl border-l-4 border-pink-600">
-                    <div class="flex items-center justify-between mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center">
-                                <i class="fas fa-female text-white text-2xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-pink-900" id="popWomenLabel">Women</h3>
-                        </div>
-                        <div class="text-3xl font-bold text-pink-700">2,487</div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm text-pink-700 font-semibold" id="popPercentage2">Percentage:</span>
-                        <span class="text-lg font-bold text-pink-800">47.4%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Stats -->
-            <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl">
-                <h4 class="font-bold text-lg mb-4 text-gray-800" id="popAdditionalTitle">Additional Information (Gram at
-                    a Glance)</h4>
-                <div class="grid md:grid-cols-3 gap-4 text-sm">
-                    <div class="text-center">
-                        <div class="font-bold text-2xl text-gray-800">1,247</div>
-                        <div class="text-gray-600" id="popHouseholds">Households/Gharsankhya (घरसंख्या)</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="font-bold text-2xl text-gray-800">8</div>
-                        <div class="text-gray-600" id="popWards">Total Wards (प्रभाग)</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="font-bold text-2xl text-gray-800">78.5%</div>
-                        <div class="text-gray-600" id="popLiteracy">Literacy Rate (साक्षरता दर)</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Note -->
-            <div class="mt-6 text-center text-sm text-gray-500" id="popNote">
-                * Data based on latest census and village records
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Language Translation System (Only relevant sections included for brevity, but all IDs are in the HTML)
-        const translations = {
-            en: {
-                govBranding: "Government of Maharashtra, RDD",
-                headerTitle: "Tembhurni Grampanchayat",
-                headerSubtitle: "Official Government Portal",
-                headerOwnership: "Madha Taluka, Solapur District, Maharashtra",
-                langText: "मराठी",
-                emailContact: "info@tembhurni.gov.in",
-                siteSearch: "Search website...",
-                navHome: "Home",
-                navAbout: "About",
-                navLeadership: "Leadership",
-                navProjects: "Projects",
-                navSchemes: "Schemes",
-                navTransparency: "Finance",
-                navInfrastructure: "Infrastructure",
-                navEnvironment: "Environment",
-                navJobs: "Employment",
-                navDashboard: "Dashboard",
-                navGallery: "Gallery",
-                navContact: "Contact",
-                heroTitle: "Welcome to Tembhurni Grampanchayat",
-                heroSubtitle: "Empowering Rural Development and Transparency",
-                heroBtn1: "Latest Updates",
-                heroBtn2: "Citizen Services",
-                stat1: "Population",
-                stat2: "Schemes Active",
-                stat3: "Satisfaction",
-                stat4: "Support",
-                quickServicesTitle: "Quick Services",
-                service1: "Certificates",
-                service2: "Pay Tax",
-                service3: "Water Bill",
-                service4: "Complaints",
-                service5: "Downloads",
-                service6: "Emergency",
-                aboutTitle: "About Tembhurni",
-                aboutIntroTitle: "Introduction",
-                aboutIntroText: "Tembhurni is a progressive village committed to rural development, transparency, and citizen welfare through modern governance.",
-                aboutMissionTitle: "Mission",
-                aboutMissionText: "Ensure transparent governance, equitable development, and delivery of essential services to all citizens of our village.",
-                aboutVisionTitle: "Vision",
-                aboutVisionText: "A self-reliant, digitally empowered village with excellent infrastructure and quality services for everyone.",
-                aboutSarpanchTitle: "Sarpanch Message",
-                aboutSarpanchText: "Dedicated to serving our community with integrity and building a prosperous future together for all residents.",
-                leadershipTitle: "Our Leadership (पदाधिकारी)",
-                stateLeadershipTitle: "State Government (Hierarchy)",
-                cmTitle: "Hon. Chief Minister",
-                cmName: "Maharashtra State",
-                dcmTitle: "Hon. Deputy Chief Minister",
-                dcmName: "Maharashtra State",
-                ministerTitle: "Hon. Minister RDD",
-                ministerName: "Panchayat Raj Department",
-                localLeadershipTitle: "Village Leadership (Gram Panchayat)",
-                sarpanchTitle: "Sarpanch",
-                sarpanchName: "Smt. Suraja Y. Bobade",
-                upSarpanchTitle: "Up-Sarpanch",
-                upSarpanchName: "Smt. Rajshree S. Newase",
-                gramSevakTitle: "Gram Panchayat Adhikari",
-                gramSevakName: "Shri. Sanjay H. Salunke",
-                membersTitle: "Panchayat Members",
-                membersCount: "17 Total Members",
-                projectsTitle: "Key Projects & Initiatives",
-                ongoingProjectTitle: "Ongoing: Road Upgradation",
-                ongoingProjectDesc: "Installation of new internal village roads in Ward 3 and 4. **Progress: 60%**. Target completion: Jan 2026.",
-                completedProjectTitle: "Completed: Water Tank",
-                completedProjectDesc: "New 50,000 litre capacity water storage tank commissioned. **Cost: ₹45 Lakh**. Completed: Sep 2025.",
-                upcomingProjectTitle: "Upcoming: Digital Literacy Center",
-                upcomingProjectDesc: "Proposal sanctioned for a new Digital Training and Career Guidance Center for youth.",
-                schemesTitle: "Government Schemes (योजना)",
-                scheme1Title: "Farmers Schemes",
-                scheme1Desc: "Central/State schemes: Application Process & Eligibility details available.",
-                scheme1Btn: "View Schemes & Apply →",
-                scheme2Title: "Women Empowerment",
-                scheme2Desc: "Self Help Groups (SHGs) support and skill development programs.",
-                scheme2Btn: "View SHG Stories →",
-                scheme3Title: "Housing Schemes",
-                scheme3Desc: "State and central housing schemes for rural citizens. Check eligibility and application status.",
-                scheme3Btn: "Apply Now →",
-                scheme4Title: "Insurance & Pension",
-                scheme4Desc: "Social security schemes for Senior Citizens, Farmers, and Workers.",
-                scheme4Btn: "Learn More →",
-                transparencyTitle: "Finance & Budget Transparency",
-                budgetVizTitle: "Where Does Your Rupee Go (Expenditure)",
-                infographicPlaceholder: "Interactive Pie Chart Visualization Placeholder",
-                expense1: "40% - Infrastructure & Public Works (Roads, Water)",
-                expense2: "30% - Schemes & Beneficiary Welfare (Schemes)",
-                expense3: "15% - Education, Health & Environment",
-                expense4: "15% - Administration & Contingency",
-                fullBudgetLink: "View Full Annual Budget Summary (PDF) →",
-                revenueTitle: "Revenue & Income Sources",
-                revenueIntro: "Breakdown of Gram Nidhi income (grants, taxes, donations):",
-                income1: "State/Central Grants Received",
-                income2: "Local Tax Collection (Property/Water)",
-                income3: "CSR/NGO Donations",
-                rddWebsiteLink: "Visit Official Audit Portal →",
-                infraTitle: "Village Infrastructure & Facilities",
-                facilitiesTitle: "Key Facilities",
-                facility1Title: "Water & Sanitation:",
-                facility1Desc: "24/7 Water Supply, Solid Waste Management implemented.",
-                facility2Title: "Health:",
-                facility2Desc: "Primary Health Sub-Center (PHSC), monthly Health & Vaccination camps.",
-                facility3Title: "Education:",
-                facility3Desc: "Primary School, Anganwadi Center, and Community Library available.",
-                facility4Title: "Connectivity:",
-                facility4Desc: "Main Bus Stop, Public WiFi Hotspot (limited coverage).",
-                smartVillageTitle: "Smart Village Dashboard",
-                smartVillageDesc: "Check real-time status of critical utilities and view the village base map:",
-                metric1: "Daily Water Availability",
-                value1: "4 Hours/Day",
-                metric2: "Daily Power Supply",
-                value2: "24 Hours",
-                villageMapBtn: "View GIS Village Base Map →",
-                environmentTitle: "Environment & Sustainability",
-                scoreboardTitle: "Green Scoreboard",
-                scoreboardDesc: "Track our progress towards a greener, cleaner village:",
-                metric3: "Trees Planted YTD:",
-                metric4: "Plastic-Free Compliance:",
-                adoptTreeBtn: "Adopt a Tree & Monitor it →",
-                ecoInitiativesTitle: "Eco Initiatives",
-                eco1: "Rainwater Harvesting & Water Conservation efforts.",
-                eco2: "Garbage Classification Scheme for dry/wet waste.",
-                eco3: "Promotion of Solar Energy Schemes for households.",
-                jobsTitle: "Employment, Skills & Education",
-                skillsTitle: "Local Skills & Opportunities",
-                skillsDesc: "Find local tenders, MSME initiatives, and skill development campaigns.",
-                link1: "Village Talent Directory (Talathi, Electricians, etc.) →",
-                link2: "Government Employment Portal Link →",
-                educationTitle: "Education & Youth Corner",
-                educationDesc: "Information on local schools, scholarship schemes, and career guidance programs.",
-                youthSpeak: "Youth Speak Blogs/Reels",
-                studentMonth: "Student of the Month Honor",
-                farmerTitle: "Farmer Support Center",
-                farmerDesc: "Get crop advisories, latest market rates (बाजारभाव), and fertilizer updates.",
-                cropPrice: "Live Crop Prices (बाजारभाव)",
-                weatherUpdate: "Weather Advisory Link",
-                dashboardTitle: "Dashboard: \"My Village, My Progress\"",
-                realTimeTitle: "Real-time Key Indicators",
-                indicator1Title: "Sanitation Coverage",
-                indicator2Title: "Gram Nidhi Utilization",
-                indicator3Title: "Grievance Redressal Rate",
-                achievementTitle: "Top 5 Achievements of the Year",
-                achievementList: "<li>100% LED Street Lighting Implemented.</li><li>Won District Award for Water Conservation.</li><li>450+ Beneficiaries under State Housing Scheme.</li><li>Village declared 100% Open Defecation Free (ODF).</li><li>Digital Literacy achieved by 90% of youth.</li>",
-                graphPlaceholder: "Ward-wise Comparative Graph Placeholder",
-                announcementsTitle: "News & Gram Sabha Notices",
-                tag1: "URGENT DEADLINE",
-                tag2: "GRAM SABHA",
-                news1Title: "Tax Payment Final Deadline Nears",
-                news1Desc: "The deadline for property tax payment is **November 15, 2025**. Pay online or at the Gram Panchayat office.",
-                news2Title: "Gram Sabha Meeting Notice & Agenda",
-                news2Desc: "The next Gram Sabha meeting is scheduled for **October 25, 2025**. Download the official notice and agenda (परिपत्रक).",
-                calendarTitle: "Upcoming Events Calendar",
-                calendarDesc: "View the schedule for Gram Sabha, Health Camps, and other village activities.",
-                event1: "25 Oct: Gram Sabha Meeting",
-                event2: "| 01 Nov: Health Checkup Camp",
-                galleryTitle: "Photo & Video Gallery",
-                gal1: "Annual Village Festival",
-                gal2: "Shramdaan & Cleanliness",
-                gal3: "Mini-Documentary Video",
-                gal4: "Virtual Gallery (Old Photos)",
-                contactTitle: "Contact & Feedback",
-                formTitle: "Grievance & Feedback Form",
-                formNameLabel: "Name",
-                formTypeLabel: "Type (Complaint/Suggestion)",
-                option1: "Complaint (Traking ID Provided)",
-                option2: "Suggestion / Feedback",
-                formMessageLabel: "Details",
-                formSubmit: "Submit & Get Tracking ID",
-                contactInfoTitle: "Gram Panchayat Office",
-                contactAddress: "Near Old Bus Stop, Tembhurni, Madha, Maharashtra - XXXXXX",
-                officeHours: "Office Hours: Mon-Sat, 10:00 AM - 6:00 PM",
-                collaborateTitle: "Collaborate With Us!",
-                collaborateText: "We welcome NGOs, CSR partners, and volunteers. Join us in making Tembhurni a model village.",
-                volunteerBtn: "Become a Volunteer (स्वयंसेवक बना)",
-                popModalTitle: "Population Demographics",
-                popTotalLabel: "Total Population",
-                popMenLabel: "Men",
-                popWomenLabel: "Women",
-                popAdditionalTitle: "Additional Information (Gram at a Glance)",
-                popHouseholds: "Households/Gharsankhya (घरसंख्या)",
-                popWards: "Total Wards (प्रभाग)",
-                popLiteracy: "Literacy Rate (साक्षरता दर)",
-                popNote: "* Data based on latest census and village records",
-                emerModalTitle: "Village Emergency Contacts",
-                emer1Label: "Ambulance / Health Center",
-                emer2Label: "Police Station",
-                emer3Label: "Fire Department",
-                emer4Label: "MSEB / Electricity",
-                footerAboutTitle: "About Us",
-                footerAboutText: "Tembhurni Grampanchayat is committed to transparent governance and rural development. <br><br>Developed as part of the **CM Samruddha Panchayat Raj Abhiyan**.",
-                footerLinksTitle: "Quick Links",
-                footerLink1: "Key Projects",
-                footerLink2: "Financial Reports",
-                footerLink3: "Environment",
-                footerLink4: "Dashboard",
-                footerServicesTitle: "Services",
-                footerServ1: "RTS Certificates",
-                footerServ2: "GR & Circulars",
-                footerServ3: "Farmer Assistance",
-                footerServ4: "Water/Electricity Status",
-                footerSocialTitle: "Connect",
-                footerCopyright: "© 2025 Tembhurni Grampanchayat. All Rights Reserved."
-            },
-            mr: {
-                govBranding: "महाराष्ट्र शासन, ग्राम विकास विभाग",
-                headerTitle: "टेंभुर्णी ग्रामपंचायत",
-                headerSubtitle: "अधिकृत सरकारी पोर्टल",
-                headerOwnership: "माढा तालुका, सोलापूर जिल्हा, महाराष्ट्र",
-                langText: "English",
-                emailContact: "info@tembhurni.gov.in",
-                siteSearch: "वेबसाइट शोधा...",
-                navHome: "मुख्यपृष्ठ",
-                navAbout: "आमच्याबद्दल",
-                navLeadership: "नेतृत्व",
-                navProjects: "प्रकल्प",
-                navSchemes: "योजना",
-                navTransparency: "वित्त",
-                navInfrastructure: "पायाभूत सुविधा",
-                navEnvironment: "पर्यावरण",
-                navJobs: "रोजगार",
-                navDashboard: "डॅशबोर्ड",
-                navGallery: "गॅलरी",
-                navContact: "संपर्क",
-                heroTitle: "टेंभुर्णी ग्रामपंचायतीत आपले स्वागत आहे",
-                heroSubtitle: "ग्रामीण विकास आणि पारदर्शकतेसाठी कार्यरत",
-                heroBtn1: "ताज्या अपडेट्स",
-                heroBtn2: "नागरिक सेवा",
-                stat1: "लोकसंख्या",
-                stat2: "सक्रिय योजना",
-                stat3: "समाधान",
-                stat4: "सहाय्य",
-                quickServicesTitle: "द्रुत सेवा",
-                service1: "प्रमाणपत्रे",
-                service2: "कर भरा",
-                service3: "पाणी बिल",
-                service4: "तक्रारी",
-                service5: "डाउनलोड",
-                service6: "आपत्कालीन",
-                aboutTitle: "टेंभुर्णी बद्दल",
-                aboutIntroTitle: "परिचय",
-                aboutIntroText: "टेंभुर्णी हे आधुनिक शासनाद्वारे ग्रामीण विकास, पारदर्शकता आणि नागरिक कल्याणासाठी वचनबद्ध एक प्रगतीशील गाव आहे.",
-                aboutMissionTitle: "ध्येय",
-                aboutMissionText: "आमच्या गावातील सर्व नागरिकांना पारदर्शक प्रशासन, न्याय्य विकास आणि आवश्यक सेवांचे वितरण सुनिश्चित करणे.",
-                aboutVisionTitle: "दृष्टीकोन",
-                aboutVisionText: "उत्कृष्ट पायाभूत सुविधा आणि सर्वांसाठी दर्जेदार सेवांसह स्वावलंबी, डिजिटली सक्षम गाव.",
-                aboutSarpanchTitle: "सरपंच संदेश",
-                aboutSarpanchText: "सर्व रहिवाशांसाठी सचोटीने आमच्या समुदायाची सेवा करण्यासाठी आणि एकत्रितपणे समृद्ध भविष्य घडवण्यासाठी समर्पित.",
-                leadershipTitle: "आमचे नेतृत्व (पदाधिकारी)",
-                stateLeadershipTitle: "राज्य शासन (पदानुक्रम)",
-                cmTitle: "मा. मुख्यमंत्री",
-                cmName: "महाराष्ट्र राज्य",
-                dcmTitle: "मा. उपमुख्यमंत्री",
-                dcmName: "महाराष्ट्र राज्य",
-                dcmTitle1: "मा. उपमुख्यमंत्री",
-                dcmName1: "महाराष्ट्र राज्य",
-                ministerTitle: "माननीय राज्यमंत्री आरडीडी",
-                ministerName: "महाराष्ट्र राज्य",
-                ministerTitleRDD: "माननीय मंत्री आरडीडी",
-                ministerName1: "महाराष्ट्र राज्य",
-                Secretary: "प्रधान सचिव आर.डी.डी",
-                ministerName2: "महाराष्ट्र राज्य",
-                localLeadershipTitle: "गाव नेतृत्व (ग्रामपंचायत)",
-                sarpanchTitle: "सरपंच",
-                sarpanchName: "श्रीमती सुरजा वाय. बोबडे ",
-                upSarpanchTitle: "उपसरपंच",
-                upSarpanchName: "श्रीमती राजश्री एस. नेवासे",
-                gramSevakTitle: "ग्रामपंचायत अधिकारी",
-                gramSevakName: "श्री. संजय ह. साळुंके",
-                membersTitle: "पंचायत सदस्य",
-                membersCount: "एकूण 17 सदस्य",
-                projectsTitle: "प्रमुख प्रकल्प आणि उपक्रम",
-                ongoingProjectTitle: "सुरू: रस्ते सुधारणा",
-                ongoingProjectDesc: "वार्ड 3 आणि 4 मध्ये अंतर्गत गाव रस्त्यांची स्थापना. **प्रगती: 60%**. लक्ष्य पूर्ण: जाने 2026.",
-                completedProjectTitle: "पूर्ण: पाण्याची टाकी",
-                completedProjectDesc: "नवीन 50,000 लीटर क्षमतेची पाण्याची टाकी सुरू केली. **खर्च: ₹45 लाख**. पूर्ण: सप्टेंबर 2025.",
-                upcomingProjectTitle: "आगामी: डिजिटल साक्षरता केंद्र",
-                upcomingProjectDesc: "युवकांसाठी नवीन डिजिटल प्रशिक्षण आणि करिअर मार्गदर्शन केंद्रासाठी प्रस्ताव मंजूर.",
-                schemesTitle: "सरकारी योजना (योजना)",
-                scheme1Title: "शेतकरी योजना",
-                scheme1Desc: "केंद्र/राज्य योजना: अर्ज प्रक्रिया आणि पात्रता तपशील उपलब्ध.",
-                scheme1Btn: "योजना पहा आणि अर्ज करा →",
-                scheme2Title: "महिला सक्षमीकरण",
-                scheme2Desc: "स्वयंसहाय्यता गट (SHGs) समर्थन आणि कौशल्य विकास कार्यक्रम.",
-                scheme2Btn: "SHG कथा पहा →",
-                scheme3Title: "गृहनिर्माण योजना",
-                scheme3Desc: "ग्रामीण नागरिकांसाठी राज्य आणि केंद्र गृहनिर्माण योजना. पात्रता आणि अर्ज स्थिती तपासा.",
-                scheme3Btn: "आता अर्ज करा →",
-                scheme4Title: "विमा आणि पेन्शन",
-                scheme4Desc: "ज्येष्ठ नागरिक, शेतकरी आणि कामगारांसाठी सामाजिक सुरक्षा योजना.",
-                scheme4Btn: "अधिक जाणून घ्या →",
-                transparencyTitle: "वित्त आणि अर्थसंकल्प पारदर्शकता",
-                budgetVizTitle: "तुमचा रुपया कुठे जातो (खर्च)",
-                infographicPlaceholder: "इंटरएक्टिव्ह पाई चार्ट व्हिज्युअलायझेशन प्लेसहोलडर",
-                expense1: "40% - पायाभूत सुविधा आणि सार्वजनिक कामे (रस्ते, पाणी)",
-                expense2: "30% - योजना आणि लाभार्थी कल्याण (योजना)",
-                expense3: "15% - शिक्षण, आरोग्य आणि पर्यावरण",
-                expense4: "15% - प्रशासन आणि आकस्मिकता",
-                fullBudgetLink: "संपूर्ण वार्षिक अर्थसंकल्प सारांश पहा (PDF) →",
-                revenueTitle: "महसूल आणि उत्पन्नाचे स्रोत",
-                revenueIntro: "ग्राम निधीच्या उत्पन्नाचे विभाजन (अनुदान, कर, देणग्या):",
-                income1: "प्राप्त राज्य/केंद्र अनुदान",
-                income2: "स्थानिक कर संकलन (मालमत्ता/पाणी)",
-                income3: "CSR/स्वयंसेवी संस्था देणग्या",
-                rddWebsiteLink: "अधिकृत लेखापरीक्षण पोर्टलला भेट द्या →",
-                infraTitle: "गाव पायाभूत सुविधा आणि सुविधा",
-                facilitiesTitle: "प्रमुख सुविधा",
-                facility1Title: "पाणी आणि स्वच्छता:",
-                facility1Desc: "24/7 पाणीपुरवठा, घनकचरा व्यवस्थापन लागू.",
-                facility2Title: "आरोग्य:",
-                facility2Desc: "प्राथमिक आरोग्य उपकेंद्र (PHSC), मासिक आरोग्य आणि लसीकरण शिबिरे.",
-                facility3Title: "शिक्षण:",
-                facility3Desc: "प्राथमिक शाळा, अंगणवाडी केंद्र आणि सार्वजनिक वाचनालय उपलब्ध.",
-                facility4Title: "कनेक्टिव्हिटी:",
-                facility4Desc: "मुख्य बस स्टॉप, सार्वजनिक वायफाय हॉटस्पॉट (मर्यादित कव्हरेज).",
-                smartVillageTitle: "स्मार्ट व्हिलेज डॅशबोर्ड",
-                smartVillageDesc: "गंभीर उपयुक्ततांची रिअल-टाइम स्थिती तपासा आणि गाव बेस नकाशा पहा:",
-                metric1: "रोजची पाण्याची उपलब्धता",
-                value1: "4 तास/दिवस",
-                metric2: "रोजचा वीज पुरवठा",
-                value2: "24 तास",
-                villageMapBtn: "जीआयएस गाव बेस नकाशा पहा →",
-                environmentTitle: "पर्यावरण आणि शाश्वतता",
-                scoreboardTitle: "ग्रीन स्कोरबोर्ड",
-                scoreboardDesc: "हरित, स्वच्छ गावाच्या दिशेने आमच्या प्रगतीचा मागोवा घ्या:",
-                metric3: "वर्षातील लावलेली झाडे:",
-                metric4: "प्लॅस्टिक-मुक्त अनुपालन:",
-                adoptTreeBtn: "झाड दत्तक घ्या आणि निरीक्षण करा →",
-                ecoInitiativesTitle: "पर्यावरण उपक्रम",
-                eco1: "पावसाचे पाणी साठवण आणि जलसंधारण प्रयत्न.",
-                eco2: "सुका/ओला कचरा वर्गीकरण योजना.",
-                eco3: "घरगुती सौर ऊर्जा योजनांना प्रोत्साहन.",
-                jobsTitle: "रोजगार, कौशल्ये आणि शिक्षण",
-                skillsTitle: "स्थानिक कौशल्ये आणि संधी",
-                skillsDesc: "स्थानिक निविदा, MSME उपक्रम आणि कौशल्य विकास मोहिमा शोधा.",
-                link1: "गाव टॅलेंट डिरेक्टरी (वीजतज्ञ, गवंडी इ.) →",
-                link2: "सरकारी रोजगार पोर्टल लिंक →",
-                educationTitle: "शिक्षण आणि युवा कोपरा",
-                educationDesc: "स्थानिक शाळा, शिष्यवृत्ती योजना आणि करिअर मार्गदर्शन कार्यक्रमांची माहिती.",
-                youthSpeak: "युवा बोल (ब्लॉग/रील)",
-                studentMonth: "महिन्याचा विद्यार्थी सन्मान",
-                farmerTitle: "शेतकरी सहाय्यता केंद्र",
-                farmerDesc: "पीक सल्ला, नवीनतम बाजारभाव आणि खत अद्यतने मिळवा.",
-                cropPrice: "थेट पीक बाजारभाव",
-                weatherUpdate: "हवामान सल्ला लिंक",
-                dashboardTitle: "डॅशबोर्ड: \"माझे गाव, माझी प्रगती\"",
-                realTimeTitle: "रिअल-टाइम प्रमुख निर्देशक",
-                indicator1Title: "स्वच्छता कव्हरेज",
-                indicator2Title: "ग्राम निधीचा वापर",
-                indicator3Title: "तक्रार निवारण दर",
-                achievementTitle: "वर्षातील शीर्ष 5 उपलब्धी",
-                achievementList: "<li>100% एलईडी पथदिवे लागू केले.</li><li>जलसंधारणसाठी जिल्हा पुरस्कार जिंकला.</li><li>राज्य गृहनिर्माण योजनेंतर्गत 450+ लाभार्थी.</li><li>गाव 100% हागणदारीमुक्त (ODF) घोषित.</li><li>90% युवकांनी डिजिटल साक्षरता प्राप्त केली.</li>",
-                graphPlaceholder: "वार्डनुसार तुलनात्मक आलेख प्लेसहोलडर",
-                announcementsTitle: "बातम्या आणि ग्रामसभा सूचना",
-                tag1: "त्वरित अंतिम मुदत",
-                tag2: "ग्रामसभा",
-                news1Title: "कर भरण्याची अंतिम मुदत जवळ",
-                news1Desc: "मालमत्ता कर भरण्याची अंतिम मुदत **15 नोव्हेंबर 2025** आहे. ऑनलाइन किंवा ग्रामपंचायत कार्यालयात भरा.",
-                news2Title: "ग्रामसभा बैठक सूचना आणि अजेंडा",
-                news2Desc: "पुढील ग्रामसभा बैठक **25 ऑक्टोबर 2025** रोजी नियोजित आहे. अधिकृत सूचना आणि अजेंडा (परिपत्रक) डाउनलोड करा.",
-                calendarTitle: "आगामी कार्यक्रम कॅलेंडर",
-                calendarDesc: "ग्रामसभा, आरोग्य शिबिरे आणि इतर गाव उपक्रमांचे वेळापत्रक पहा.",
-                event1: "25 ऑक्टो: ग्रामसभा बैठक",
-                event2: "| 01 नोव्हें: आरोग्य तपासणी शिबिर",
-                galleryTitle: "फोटो आणि व्हिडिओ गॅलरी",
-                gal1: "वार्षिक गाव उत्सव",
-                gal2: "श्रमदान आणि स्वच्छता",
-                gal3: "मिनी-डॉक्युमेंटरी व्हिडिओ",
-                gal4: "व्हर्च्युअल गॅलरी (जुने फोटो)",
-                contactTitle: "संपर्क आणि अभिप्राय",
-                formTitle: "तक्रार आणि अभिप्राय फॉर्म",
-                formNameLabel: "नाव",
-                formTypeLabel: "प्रकार (तक्रार/सूचना)",
-                option1: "तक्रार (ट्रॅकिंग आयडी प्रदान केला जाईल)",
-                option2: "सूचना / अभिप्राय",
-                formMessageLabel: "तपशील",
-                formSubmit: "सबमिट करा आणि ट्रॅकिंग आयडी मिळवा",
-                contactInfoTitle: "ग्रामपंचायत कार्यालय",
-                contactAddress: "जुने बस स्टॉपजवळ, टेंभुर्णी, माढा, महाराष्ट्र - XXXXXX",
-                officeHours: "कार्यालयीन वेळ: सोम-शनि, स. 10:00 ते सायं. 6:00",
-                collaborateTitle: "आमच्यासोबत सहयोग करा!",
-                collaborateText: "आम्ही स्वयंसेवी संस्था, सीएसआर भागीदार आणि स्वयंसेवकांचे स्वागत करतो. टेंभुर्णीला एक आदर्श गाव बनवण्यासाठी आमच्यात सामील व्हा.",
-                volunteerBtn: "स्वयंसेवक बना (Become a Volunteer)",
-                popModalTitle: "लोकसंख्या तपशील",
-                popTotalLabel: "एकूण लोकसंख्या",
-                popMenLabel: "पुरुष",
-                popWomenLabel: "महिला",
-                popAdditionalTitle: "अतिरिक्त माहिती (गावावर एक दृष्टिक्षेप)",
-                popHouseholds: "कुटुंबे/घरसंख्या (Gharsankhya)",
-                popWards: "एकूण प्रभाग (Wards)",
-                popLiteracy: "साक्षरता दर (Literacy Rate)",
-                popNote: "* नवीनतम जनगणना आणि गाव रेकॉर्डवर आधारित डेटा",
-                emerModalTitle: "गाव आपत्कालीन संपर्क",
-                emer1Label: "रुग्णवाहिका / आरोग्य केंद्र",
-                emer2Label: "पोलीस स्टेशन",
-                emer3Label: "अग्निशमन विभाग",
-                emer4Label: "MSEB / वीज विभाग",
-                footerAboutTitle: "आमच्याबद्दल",
-                footerAboutText: "टेंभुर्णी ग्रामपंचायत पारदर्शक प्रशासन आणि ग्रामीण विकासासाठी वचनबद्ध आहे. <br><br>Developed as part of the **CM Samruddha Panchayat Raj Abhiyan**.",
-                footerLinksTitle: "द्रुत दुवे",
-                footerLink1: "प्रमुख प्रकल्प",
-                footerLink2: "आर्थिक अहवाल",
-                footerLink3: "पर्यावरण",
-                footerLink4: "डॅशबोर्ड",
-                footerServicesTitle: "सेवा",
-                footerServ1: "RTS प्रमाणपत्रे",
-                footerServ2: "जीआर आणि परिपत्रके",
-                footerServ3: "शेतकरी सहाय्यता",
-                footerServ4: "पाणी/वीज स्थिती",
-                footerSocialTitle: "जोडा",
-                footerCopyright: "© 2025 टेंभुर्णी ग्रामपंचायत. सर्व हक्क राखीव."
-            }
-        };
-
-        let currentLang = 'en';
-
-        // Language Toggle Function
-        function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'mr' : 'en';
-            updateContent();
-        }
-
-        // Update All Content
-        function updateContent() {
-            const lang = translations[currentLang];
-            document.getElementById('langText').textContent = lang.langText;
-
-
-            Object.keys(lang).forEach(key => {
-                const element = document.getElementById(key);
-                if (element) {
-                    if (key.endsWith('Desc') || key.startsWith('achievementList') || key.startsWith('footerAbout') || key.startsWith('expense') || key.startsWith('eco')) {
-                        element.innerHTML = lang[key];
-                    } else if (key.endsWith('Btn')) {
-                        element.textContent = lang[key];
-                    } else if (key === 'siteSearch') {
-                        document.getElementById('siteSearch').placeholder = lang[key];
-                    } else {
-                        element.textContent = lang[key];
-                    }
-                }
-            });
-
-            // Manually update select options
-            document.getElementById('option1').textContent = lang.option1;
-            document.getElementById('option2').textContent = lang.option2;
-        }
-
-        // Functionality for Buttons
-        function scrollToContact() {
-            document.querySelector('#contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // Modal Functions
-        function openPopulationModal() {
-            document.getElementById('populationModal').style.display = 'flex';
-        }
-
-        function closePopulationModal() {
-            document.getElementById('populationModal').style.display = 'none';
-        }
-
-        function openEmergencyModal() {
-            document.getElementById('emergencyModal').style.display = 'flex';
-        }
-
-        function closeEmergencyModal() {
-            document.getElementById('emergencyModal').style.display = 'none';
-        }
-
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('active');
-        }
-
-        // Close modal on outside click
-        window.onclick = function (event) {
-            const popModal = document.getElementById('populationModal');
-            const emerModal = document.getElementById('emergencyModal');
-
-            if (event.target === popModal) {
-                closePopulationModal();
-            }
-            if (event.target === emerModal) {
-                closeEmergencyModal();
-            }
-        }
-
-        // Add event listener to language toggle button
-        document.getElementById('langToggle').addEventListener('click', toggleLanguage);
-
-        // Initial content load
-        document.addEventListener('DOMContentLoaded', () => {
-            updateContent();
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerHeight = document.querySelector('.main-header').offsetHeight + document.querySelector('.nav-menu').offsetHeight;
-                    const topPos = target.offsetTop - headerHeight - 10;
-
-                    window.scrollTo({
-                        top: topPos,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Add scroll effect to header
-        window.addEventListener('scroll', function () {
-            const header = document.querySelector('.main-header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        document.getElementById("villageMapBtn").addEventListener("click", function () {
-            window.open("https://bhuvan.nrsc.gov.in/ngmaps?mode=Hybrid&sid=oEkQDY4BZD0K0NSt5xjz&poi_sid=Tembhurni%2C+SOLAPUR%2C+MAHARASHTRA&poi_datatype=point&cpoint=%5B18.028916953445%2C75.191782491264%5D#16/18.028917/75.191782", "_blank"
-
-            );
-        });
-    </script>
-
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'mr',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-
-        // Toggle button function
-        document.addEventListener('DOMContentLoaded', () => {
-            const langToggle = document.getElementById('langToggle');
-            let isMarathi = false;
-
-            langToggle.addEventListener('click', () => {
-                if (!isMarathi) {
-                    document.querySelector('.goog-te-combo').value = 'mr';
-                    document.querySelector('.goog-te-combo').dispatchEvent(new Event('change'));
-                    document.getElementById('langText').innerText = 'English';
-                    isMarathi = true;
-                } else {
-                    document.querySelector('.goog-te-combo').value = 'en';
-                    document.querySelector('.goog-te-combo').dispatchEvent(new Event('change'));
-                    document.getElementById('langText').innerText = 'मराठी';
-                    isMarathi = false;
-                }
-            });
-        });
-    </script>
-
-    <!-- Google Translate Script -->
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <!-- Hidden Google Translate Element -->
-    <div id="google_translate_element" style="display: none;"></div>
+  </footer>
 
 
 
