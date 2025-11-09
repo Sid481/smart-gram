@@ -1,0 +1,317 @@
+/* Base Styles */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+header {
+  font-family: 'Poppins', sans-serif;
+}
+
+header img {
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+header h1 {
+  letter-spacing: 0.4px;
+}
+
+header input::placeholder {
+  color: #9ca3af;
+}
+
+/* Top Bar */
+.top-bar {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg,
+      /* diagonal direction from top-left to bottom-right */
+      #ff9933 0%,
+      /* saffron start */
+      #ffffff 45%,
+      /* white middle */
+      #138808 90%
+      /* green end */
+    );
+  position: relative;
+  overflow: hidden;
+}
+
+/* Added for black text in hero section */
+.hero-content h1 {
+  color: #000;
+}
+
+.hero-content p {
+  color: #333;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+.card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  text-align: center;
+
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #2563eb;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #2563eb;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------
+   Quick Services Section
+   --------------------------------------------------- */
+
+/* Section background and spacing */
+#services {
+  background-color: #f9fafb;
+  padding: 4rem 0;
+}
+
+/* Section title */
+#services .section-title {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  /* Deep blue title */
+}
+
+#services .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #f59e0b, #ef4444);
+  border-radius: 2px;
+}
+
+/* Icon boxes */
+.icon-box {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+  text-align: center;
+}
+
+.icon-box i {
+  transition: all 0.3s ease;
+}
+
+.icon-box:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  border-color: #3b82f6;
+}
+
+.icon-box:hover i {
+  transform: scale(1.2) rotate(5deg);
+}
+
+/* Text under icons */
+.icon-box p {
+  font-weight: 600;
+  color: #111827;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #services {
+    padding: 3rem 1rem;
+  }
+
+  .icon-box {
+    padding: 1.5rem;
+  }
+
+  #services .section-title {
+    font-size: 1.5rem;
+  }
+}
+
+/*hamburger icon*/
+#navLinks {
+  transition: all 0.3s ease-in-out;
+}
+
+#google_translate_element {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+#google_translate_element select {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #1f2937;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#google_translate_element select:hover {
+  background-color: #e5e7eb;
+}
+
+/* ---- Google Translate Styling ---- */
+#google_translate_element {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+/* Make it look similar to the search box */
+#google_translate_element select {
+  background-color: #f3f4f6;
+  border: 1px solid #60a5fa;
+  /* Blue border */
+  border-radius: 9999px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #1f2937;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 150px;
+  /* control width */
+}
+
+#google_translate_element select:hover {
+  background-color: #e0f2fe;
+  border-color: #3b82f6;
+}
+
+/* Optional: Hide "Powered by Google" small text */
+.goog-te-gadget span {
+  display: none !important;
+}
+
+/* Hide top Google banner */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+/* new code */
+/* Align label + dropdown in one line */
+.translate-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Label styling */
+.translate-label {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 15px;
+}
+
+/* Google Translate dropdown styling */
+#google_translate_element select {
+  background-color: #f3f4f6;
+  border: 1px solid #60a5fa;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #1f2937;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+#google_translate_element select:hover {
+  background-color: #e0f2fe;
+  border-color: #3b82f6;
+}
+
+/* Hide Google logo & text */
+.goog-logo-link,
+.goog-te-gadget span {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  color: transparent !important;
+}
+
+
+body {
+  top: 0px !important;
+}
+
+
+
+.footer {
+  background-color: #111827;
+  color: #d1d5db;
+}
