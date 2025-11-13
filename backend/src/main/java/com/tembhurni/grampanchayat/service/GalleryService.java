@@ -21,8 +21,14 @@ public class GalleryService {
 
     private final String UPLOAD_DIR = "uploads"; // Optionally configurable
 
-    public GalleryItem uploadItem(MultipartFile file, String category, String title,
-                                  Integer year, String month, String uploadedBy, FileType type) throws IOException {
+    public GalleryItem uploadItem(
+            MultipartFile file,
+            String category,
+            String title,
+            Integer year,
+            String month,
+            FileType type
+    ) throws IOException {
         String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
         Path uploadPath = Paths.get(UPLOAD_DIR);
 
@@ -37,20 +43,23 @@ public class GalleryService {
         item.setCategory(category);
         item.setYear(year);
         item.setMonth(month);
-        item.setFileUrl("/uploads/" + fileName); // For web access, adjust if needed.
-        item.setUploadedBy(uploadedBy);
+        item.setFileUrl("/uploads/" + fileName); // For web access
         item.setUploadTimestamp(LocalDateTime.now());
         item.setType(type);
 
         return galleryItemRepository.save(item);
     }
 
+
+ // Change to ascending order by id
     public List<GalleryItem> getItemsByCategory(String category) {
-        return galleryItemRepository.findByCategoryOrderByUploadTimestampDesc(category);
+        return galleryItemRepository.findByCategoryOrderByIdAsc(category);
     }
 
+ // Change to ascending order by id with limit
     public List<GalleryItem> getRecentItems(int count) {
-        // For "top N" recent items, use repository method with limit if available
-        return galleryItemRepository.findTop10ByOrderByUploadTimestampDesc();
+        List<GalleryItem> allItemsAsc = galleryItemRepository.findAllByOrderByIdAsc();
+        return allItemsAsc.stream().limit(count).toList();
     }
+
 }

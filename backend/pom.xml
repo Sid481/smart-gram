@@ -43,11 +43,11 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Spring Boot Security (for admin access) -->
+       <!--  Spring Boot Security (for admin access) 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- Lombok (optional, for less boilerplate code) -->
         <dependency>
