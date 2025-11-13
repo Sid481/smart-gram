@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const uploadBtn = document.getElementById("uploadBtn");
   const uploadMessage = document.getElementById("uploadMessage");
 
+  //const username = "ADMIN";
   const ADMIN_PASSWORD = "smartgram123";
 
   // ✅ Maintain session using localStorage
@@ -73,19 +74,82 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 💾 Upload (frontend simulation)
-  uploadBtn.addEventListener("click", () => {
+//   // 💾 Upload (frontend simulation)
+//   uploadBtn.addEventListener("click", () => {
+//     const page = pageSelect.value;
+//     const category = categorySelect.value;
+//     const file = document.getElementById("fileInput").files[0];
+
+//     if (!page || !category || !file) {
+//       uploadMessage.textContent = "⚠️ Please fill all fields!";
+//       uploadMessage.style.color = "red";
+//       return;
+//     }
+
+//     uploadMessage.textContent = "✅ File ready to upload (backend will handle saving).";
+//     uploadMessage.style.color = "green";
+//   });
+// });
+
+uploadBtn.addEventListener("click", async () => {
     const page = pageSelect.value;
     const category = categorySelect.value;
-    const file = document.getElementById("fileInput").files[0];
+    const year = document.getElementById("yearSelect").value;
+    const month = document.getElementById("monthSelect").value;
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+    const type = getFileType(file);
 
     if (!page || !category || !file) {
-      uploadMessage.textContent = "⚠️ Please fill all fields!";
+      uploadMessage.textContent = "⚠️ Please fill all required fields and select a file!";
       uploadMessage.style.color = "red";
       return;
     }
 
-    uploadMessage.textContent = "✅ File ready to upload (backend will handle saving).";
-    uploadMessage.style.color = "green";
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("category", category);
+    formData.append("title", file.name); // You can add separate title input if needed
+    formData.append("year", year);
+    formData.append("month", month);
+    formData.append("type", type);
+
+    try {
+      uploadMessage.textContent = "⬆️ Uploading...";
+      uploadMessage.style.color = "#1d4ed8";
+
+      const response = await fetch("http://localhost:8081/api/gallery/upload", {
+        method: "POST",
+        body: formData,
+        credentials: "include" // important for session cookie to be sent
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Upload failed");
+      }
+
+      const result = await response.json();
+      uploadMessage.textContent = "✅ Upload successful!";
+      uploadMessage.style.color = "green";
+
+      // Optionally, clear the inputs or refresh preview here
+      fileInput.value = "";
+      categorySelect.value = "";
+      pageSelect.value = "";
+    } catch (error) {
+      uploadMessage.textContent = "❌ " + error.message;
+      uploadMessage.style.color = "red";
+    }
   });
+
+  // Helper to determine file type string for backend enum
+  function getFileType(file) {
+    if (!file) return "";
+    const mime = file.type;
+    if (mime.startsWith("image/")) return "IMAGE";
+    if (mime === "application/pdf") return "PDF";
+    if (mime.startsWith("video/")) return "VIDEO";
+    return "";
+  }
 });
