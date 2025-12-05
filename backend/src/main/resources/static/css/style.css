@@ -315,3 +315,22 @@ body {
   background-color: #111827;
   color: #d1d5db;
 }
+
+
+
+/* Prevent horizontal scroll gap */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Make search + translate fit inside screen */
+#searchInput {
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .search-container, .translate-box {
+    width: 100% !important;
+    justify-content: center;
+  }
+}
