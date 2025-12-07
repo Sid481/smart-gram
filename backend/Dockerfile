@@ -37,4 +37,5 @@ ENV PORT=8080
 EXPOSE 8080
 
 # Start the app
+
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar app.jar"]
