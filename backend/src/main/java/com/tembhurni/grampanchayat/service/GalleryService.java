@@ -12,6 +12,7 @@ import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class GalleryService {
@@ -58,8 +59,20 @@ public class GalleryService {
 
  // Change to ascending order by id with limit
     public List<GalleryItem> getRecentItems(int count) {
+        // Get all items in ascending order of ID
         List<GalleryItem> allItemsAsc = galleryItemRepository.findAllByOrderByIdAsc();
-        return allItemsAsc.stream().limit(count).toList();
+
+        // Filter to include only items with an actual file present in /uploads
+        List<GalleryItem> itemsWithFiles = allItemsAsc.stream()
+            .filter(item -> {
+                // Remove "/uploads/" prefix to get filename
+                String filename = item.getFileUrl().replace("/uploads/", "");
+                return Files.exists(Paths.get(UPLOAD_DIR, filename));
+            })
+            .collect(Collectors.toList());
+
+        // Return at most 'count' items
+        return itemsWithFiles.stream().limit(count).collect(Collectors.toList());
     }
 
 }
