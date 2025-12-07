@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Dynamically load Google Translate script
-  (function () {
+  /*(function () {
     if (document.getElementById("google-translate-script")) return;
 
     var gt = document.createElement("script");
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gt.id = "google-translate-script";
     gt.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
     document.body.appendChild(gt);
-  })();
+  })();*/
 });
 
 // Initialize Google Translate (global callback required by Google)

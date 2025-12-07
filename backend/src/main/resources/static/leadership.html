@@ -324,8 +324,10 @@
 
 
                     <!-- 🧩 Panchayat Members Card -->
-                    <div class="card p-6 text-center">
-                        <div
+                    <div class="card p-6 text-center cursor-pointer hover:shadow-xl hover:scale-[1.02] transition"
+                         id="membersCard">
+
+                    <div
                             class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center shadow-lg overflow-hidden">
                             <img src="assets/images/members.png" alt="Gram Panchayat Adhikari"
                                 class="w-full h-full object-cover" />
@@ -443,6 +445,11 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.getElementById("membersCard").addEventListener("click", () => {
+            document.getElementById("membersModal").classList.remove("hidden");
+        });
+    </script>
 
 </body>
 
