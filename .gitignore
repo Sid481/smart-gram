@@ -14,3 +14,4 @@ build/
 
 # System
 .DS_Store
+/.metadata/
