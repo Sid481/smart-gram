@@ -31,7 +31,7 @@ COPY --from=build /app/target/smart-gram-0.0.1-SNAPSHOT.jar app.jar
 ENV PORT=8080
 
 # (Optional) Java options (uncomment & tweak if needed)
-# ENV JAVA_OPTS="-Xms256m -Xmx512m"
+ENV JAVA_OPTS="-Xms256m -Xmx512m"
 
 # Expose the port (for local usage; Render detects from $PORT)
 EXPOSE 8080
