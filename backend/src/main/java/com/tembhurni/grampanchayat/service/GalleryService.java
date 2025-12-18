@@ -6,6 +6,7 @@ import com.tembhurni.grampanchayat.repository.GalleryItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class GalleryService {
     /**
      * Upload a new gallery item and store file bytes + metadata in the database.
      */
+    @Transactional
     public GalleryItem uploadItem(
             MultipartFile file,
             String category,
