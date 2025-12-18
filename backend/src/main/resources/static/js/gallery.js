@@ -10,10 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let galleryData = [];
 
-  // Function to fetch recent gallery items (limit 10)
+  // Fetch recent gallery items (limit 10 from backend)
   async function fetchGalleryItems() {
     try {
-      // ✅ Relative URL so it works on the same port as Spring Boot
       const response = await fetch("/api/gallery/recent", {
         credentials: "include"
       });
@@ -22,14 +21,17 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       const items = await response.json();
 
-      // Map backend GalleryItem to frontend galleryData format
+      // Map backend GalleryItem -> frontend model
       galleryData = items.map(item => ({
-        src: item.fileUrl,
+        id: item.id,
+        // Serve image bytes via backend endpoint (disk-backed)
+        src: `/api/gallery/${item.id}/file`,
         category: (item.category || "").toLowerCase(),
         year: String(item.year || ""),
         month: (item.month || "").toLowerCase(),
         caption: item.title || ""
       }));
+
       applyFilters();
     } catch (error) {
       galleryGrid.innerHTML =
@@ -37,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Render gallery items inside galleryGrid container
+  // Render gallery items
   function renderGallery(items) {
     galleryGrid.innerHTML = "";
     if (!items || items.length === 0) {
@@ -50,11 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = document.createElement("div");
       card.className = "gallery-item";
 
-      // Detect file type (optional: for video/pdf support)
-      let mediaTag;
       const src = item.src || "";
       const caption = item.caption || "";
 
+      let mediaTag;
+
+      // If later you support video/pdf, extend here based on item.type
       if (src.endsWith(".mp4")) {
         mediaTag =
           `<video src="${src}" controls class="w-full h-40 object-cover"></video>`;
@@ -62,9 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
         mediaTag =
           `<a href="${src}" target="_blank" rel="noopener noreferrer">View PDF</a>`;
       } else {
-        // Images (jpeg, jpg, png, etc.)
+        // Images
         mediaTag =
-          `<img src="${src}" alt="${caption}" class="cursor-pointer rounded-lg shadow hover:opacity-80 transition" />`;
+          `<img src="${src}" alt="${caption}"
+                class="cursor-pointer rounded-lg shadow hover:opacity-80 transition"
+                loading="lazy"
+                onerror="this.style.display='none';"
+          />`;
       }
 
       card.innerHTML = `
@@ -118,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Filter gallery using active category, year, and month selections
+  // Apply filters (category/year/month) on in-memory data
   function applyFilters() {
     const activeBtn = document.querySelector(".filter-btn.active");
     const activeCategory = activeBtn ? activeBtn.dataset.category : "all";
@@ -138,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderGallery(filtered);
   }
 
-  // Add click handlers to filter buttons (only filtering locally)
+  // Filter buttons
   if (filterBtns && filterBtns.length > 0) {
     filterBtns.forEach(btn => {
       btn.addEventListener("click", () => {
@@ -152,6 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
   yearFilter.addEventListener("change", applyFilters);
   monthFilter.addEventListener("change", applyFilters);
 
-  // Initial fetch and render on page load
+  // Initial load
   fetchGalleryItems();
 });
