@@ -13,15 +13,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const uploadBtn = document.getElementById("uploadBtn");
   const uploadMessage = document.getElementById("uploadMessage");
   const previewSection = document.getElementById("previewSection");
+  const previewGrid = document.getElementById("previewGrid");
 
   const yearSelect = document.getElementById("yearSelect");
   const monthSelect = document.getElementById("monthSelect");
   const fileInput = document.getElementById("fileInput");
 
-  // TEMP DEV PASSWORD – move to backend for real security
+  // ---- NEW VIDEO MODAL REFERENCES ----
+  const videoModal = document.getElementById("videoModal");
+  const videoPlayer = document.getElementById("videoPlayer");
+  const closeVideoModal = document.getElementById("closeVideoModal");
+
   const ADMIN_PASSWORD = "smartgram123";
 
-  // ✅ Maintain session using localStorage
+  const navButtonContainer = document.createElement("div");
+  navButtonContainer.style.display = "flex";
+  navButtonContainer.style.gap = "10px";
+  navButtonContainer.style.marginBottom = "10px";
+
+  const viewUploadBtn = document.createElement("button");
+  viewUploadBtn.textContent = "📤 Upload Content";
+  viewUploadBtn.style.padding = "6px 12px";
+  viewUploadBtn.style.cursor = "pointer";
+
+  const viewPreviewBtn = document.createElement("button");
+  viewPreviewBtn.textContent = "📁 View Uploaded Items";
+  viewPreviewBtn.style.padding = "6px 12px";
+  viewPreviewBtn.style.cursor = "pointer";
+
+  navButtonContainer.appendChild(viewUploadBtn);
+  navButtonContainer.appendChild(viewPreviewBtn);
+
+  uploadSection.parentElement.insertBefore(navButtonContainer, uploadSection);
+
   if (localStorage.getItem("isAdminLoggedIn") === "true") {
     showAdminPanel();
   }
@@ -32,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
         loginMessage.textContent = "✅ Access Granted!";
         loginMessage.style.color = "green";
         localStorage.setItem("isAdminLoggedIn", "true");
-
         setTimeout(showAdminPanel, 700);
       } else {
         loginMessage.textContent = "❌ Incorrect Password!";
@@ -44,11 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function showAdminPanel() {
     if (loginSection) loginSection.classList.add("hidden");
     if (uploadSection) uploadSection.classList.remove("hidden");
-    if (previewSection) previewSection.classList.remove("hidden");
+    if (previewSection) previewSection.classList.add("hidden");
     if (adminHeader) adminHeader.classList.remove("hidden");
   }
 
-  // 🚪 Logout button
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("isAdminLoggedIn");
@@ -56,14 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ⬅️ Back to Home button
   if (backBtn) {
     backBtn.addEventListener("click", () => {
       window.location.href = "index.html";
     });
   }
 
-  // 📂 Page-based categories
   const pageCategories = {
     gallery: ["Gram Sabha", "Festivals", "Cultural Events", "Govt Schemes"],
     announcements: ["Notice", "Circulars", "Public Announcements"],
@@ -87,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 💾 Upload with backend call
   if (uploadBtn) {
     uploadBtn.addEventListener("click", async () => {
       const page = pageSelect ? pageSelect.value : "";
@@ -98,72 +117,146 @@ document.addEventListener("DOMContentLoaded", () => {
       const type = getFileType(file);
 
       if (!page || !category || !file) {
-        if (uploadMessage) {
-          uploadMessage.textContent = "⚠️ Please fill all required fields and select a file!";
-          uploadMessage.style.color = "red";
-        }
+        showMessage(uploadMessage, "⚠️ Please fill all required fields and select a file!", "red");
         return;
       }
 
       if (!type) {
-        if (uploadMessage) {
-          uploadMessage.textContent = "⚠️ Unsupported file type!";
-          uploadMessage.style.color = "red";
-        }
+        showMessage(uploadMessage, "⚠️ Unsupported file type!", "red");
         return;
       }
 
       const formData = new FormData();
       formData.append("file", file);
       formData.append("category", category);
-      formData.append("title", file.name); // You can add a separate title input if needed
+      formData.append("title", file.name);
       formData.append("year", year);
       formData.append("month", month);
       formData.append("type", type);
 
       try {
-        if (uploadMessage) {
-          uploadMessage.textContent = "⬆️ Uploading...";
-          uploadMessage.style.color = "#1d4ed8";
-        }
+        showMessage(uploadMessage, "⬆️ Uploading...", "#1d4ed8");
 
-        // ✅ Relative URL for single-port Spring Boot
         const response = await fetch("/api/gallery/upload", {
           method: "POST",
           body: formData,
-          credentials: "include" // important if backend uses session cookies
+          credentials: "include"
         });
 
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(errorText || "Upload failed");
-        }
+        if (!response.ok) throw new Error(await response.text());
 
-        const result = await response.json();
-        if (uploadMessage) {
-          uploadMessage.textContent = "✅ Upload successful!";
-          uploadMessage.style.color = "green";
-        }
-
-        // Optionally, clear the inputs or refresh preview here
-        if (fileInput) fileInput.value = "";
-        if (categorySelect) categorySelect.value = "";
-        if (pageSelect) pageSelect.value = "";
-        if (yearSelect) yearSelect.value = "all";
-        if (monthSelect) monthSelect.value = "all";
-
-        // TODO: call a function here to refresh preview list if you have one
-        // refreshPreview();
+        showMessage(uploadMessage, "✅ Upload successful!", "green");
+        clearForm();
       } catch (error) {
-        if (uploadMessage) {
-          uploadMessage.textContent = "❌ " + error.message;
-          uploadMessage.style.color = "red";
-        }
+        showMessage(uploadMessage, "❌ " + error.message, "red");
       }
     });
   }
 
-  // Helper to determine file type string for backend enum
+  function clearForm() {
+    if (fileInput) fileInput.value = "";
+    if (categorySelect) categorySelect.value = "";
+    if (pageSelect) pageSelect.value = "";
+    yearSelect.value = "2025";
+    monthSelect.value = "January";
+  }
+
+  function showMessage(node, msg, color) {
+    if (!node) return;
+    node.textContent = msg;
+    node.style.color = color;
+  }
+
+  viewPreviewBtn.addEventListener("click", () => {
+    uploadSection.classList.add("hidden");
+    previewSection.classList.remove("hidden");
+    loadUploadedItems();
+  });
+
+  viewUploadBtn.addEventListener("click", () => {
+    previewSection.classList.add("hidden");
+    uploadSection.classList.remove("hidden");
+  });
+
+  async function loadUploadedItems() {
+    try {
+      previewGrid.innerHTML = "Loading...";
+
+      const response = await fetch("/api/gallery/recent?limit=50", {
+        credentials: "include"
+      });
+      if (!response.ok) throw new Error("Failed to fetch items");
+
+      const items = await response.json();
+      previewGrid.innerHTML = "";
+
+      if (items.length === 0) {
+        previewGrid.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: #999;'>No items uploaded yet</p>";
+        return;
+      }
+
+      items.forEach(item => {
+        const isVideo = item.type === "VIDEO";
+        const fileUrl = `/api/gallery/${item.id}/file`;
+
+        const card = document.createElement("div");
+        card.className = "preview-card";
+
+        card.innerHTML = `
+          <div class="preview-image-container">
+            ${isVideo
+              ? `<video class="preview-image" muted onclick="openVideo('${fileUrl}')">
+                   <source src="${fileUrl}" type="video/mp4">
+                 </video>`
+              : `<img src="${fileUrl}"
+                  class="preview-image"
+                  onclick="openImage('${fileUrl}')"
+                  onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27150%27 height=%27150%27%3E%3Crect fill=%27%23ddd%27 width=%27150%27 height=%27150%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27%23999%27%3ENo Image%3C/text%3E%3C/svg%3E'">`
+            }
+          </div>
+          <div class="preview-info">
+            <p class="preview-title">${item.title}</p>
+            <p class="preview-meta">
+              <strong>Category:</strong> ${item.category}<br>
+              <strong>Date:</strong> ${item.month} ${item.year}<br>
+              <strong>Type:</strong> ${item.type}
+            </p>
+            <div class="preview-actions">
+              <button class="btn-delete" onclick="deleteItem(${item.id})">🗑️ Delete</button>
+            </div>
+          </div>
+        `;
+
+        previewGrid.appendChild(card);
+      });
+
+    } catch (error) {
+      previewGrid.innerHTML = `<p style='grid-column: 1/-1; color: red;'>Error: ${error.message}</p>`;
+      console.error("Load error:", error);
+    }
+  }
+
+  window.deleteItem = async (id) => {
+    if (!confirm("Are you sure you want to delete this item?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/gallery/${id}`, {
+        method: "DELETE",
+        credentials: "include"
+      });
+
+      if (!response.ok) throw new Error("Delete failed");
+
+      showMessage(uploadMessage, "✅ Item deleted successfully", "green");
+      loadUploadedItems();
+    } catch (error) {
+      showMessage(uploadMessage, `❌ Delete error: ${error.message}`, "red");
+      console.error("Delete error:", error);
+    }
+  };
+
   function getFileType(file) {
     if (!file) return "";
     const mime = file.type;
@@ -172,4 +265,26 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mime.startsWith("video/")) return "VIDEO";
     return "";
   }
+
+  // ----- VIDEO MODAL -----
+  window.openVideo = (url) => {
+    videoPlayer.src = url;
+    videoModal.classList.remove("hidden");
+    videoPlayer.play();
+  };
+
+  closeVideoModal.addEventListener("click", () => {
+    videoModal.classList.add("hidden");
+    videoPlayer.pause();
+    videoPlayer.src = "";
+  });
+
+  videoModal.addEventListener("click", (e) => {
+    if (e.target === videoModal) {
+      videoModal.classList.add("hidden");
+      videoPlayer.pause();
+      videoPlayer.src = "";
+    }
+  });
+
 });

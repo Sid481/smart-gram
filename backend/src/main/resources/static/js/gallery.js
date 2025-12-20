@@ -4,45 +4,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearFilter = document.getElementById("yearFilter");
   const monthFilter = document.getElementById("monthFilter");
 
-  if (!galleryGrid || !yearFilter || !monthFilter) {
-    return;
-  }
+  if (!galleryGrid || !yearFilter || !monthFilter) return;
 
   let galleryData = [];
 
-  // Function to fetch recent gallery items (limit 10)
+  // Fetch recent gallery items
   async function fetchGalleryItems() {
     try {
-      // ✅ Relative URL so it works on the same port as Spring Boot
       const response = await fetch("/api/gallery/recent", {
         credentials: "include"
       });
-      if (!response.ok) {
-        throw new Error("Failed to fetch gallery items");
-      }
+      if (!response.ok) throw new Error("Failed to fetch gallery items");
+
       const items = await response.json();
 
-      // Map backend GalleryItem to frontend galleryData format
       galleryData = items.map(item => ({
-        src: item.fileUrl,
+        id: item.id,
+        src: `/api/gallery/${item.id}/file`,
         category: (item.category || "").toLowerCase(),
         year: String(item.year || ""),
         month: (item.month || "").toLowerCase(),
-        caption: item.title || ""
+        caption: item.title || "",
+        type: item.type || "IMAGE"
       }));
+
       applyFilters();
     } catch (error) {
-      galleryGrid.innerHTML =
-        `<p class="text-red-500 text-center w-full">${error.message}</p>`;
+      galleryGrid.innerHTML = `<p class="text-red-500 text-center w-full">${error.message}</p>`;
     }
   }
 
-  // Render gallery items inside galleryGrid container
+  // Render gallery items
   function renderGallery(items) {
     galleryGrid.innerHTML = "";
     if (!items || items.length === 0) {
-      galleryGrid.innerHTML =
-        `<p class="text-gray-500 text-center w-full">No images found for this filter.</p>`;
+      galleryGrid.innerHTML = `<p class="text-gray-500 text-center w-full">No items found for this filter.</p>`;
       return;
     }
 
@@ -50,26 +46,35 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = document.createElement("div");
       card.className = "gallery-item";
 
-      // Detect file type (optional: for video/pdf support)
-      let mediaTag;
       const src = item.src || "";
       const caption = item.caption || "";
+      const type = item.type;
 
-      if (src.endsWith(".mp4")) {
-        mediaTag =
-          `<video src="${src}" controls class="w-full h-40 object-cover"></video>`;
-      } else if (src.endsWith(".pdf")) {
-        mediaTag =
-          `<a href="${src}" target="_blank" rel="noopener noreferrer">View PDF</a>`;
+      let mediaTag = "";
+
+      if (type === "VIDEO") {
+        mediaTag = `
+          <video controls class="w-full h-40 object-cover">
+            <source src="${src}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        `;
+      } else if (type === "PDF") {
+        mediaTag = `<a href="${src}" target="_blank" rel="noopener noreferrer" class="block text-blue-600 underline">View PDF</a>`;
       } else {
-        // Images (jpeg, jpg, png, etc.)
-        mediaTag =
-          `<img src="${src}" alt="${caption}" class="cursor-pointer rounded-lg shadow hover:opacity-80 transition" />`;
+        // IMAGE
+        mediaTag = `
+          <img src="${src}" alt="${caption}"
+               class="cursor-pointer rounded-lg shadow hover:opacity-80 transition w-full h-40 object-cover"
+               loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<p class=text-gray-400>Failed to load</p>';"
+          />
+        `;
       }
 
       card.innerHTML = `
         ${mediaTag}
-        <p class="caption text-sm mt-2">${caption}</p>
+        <p class="caption text-sm mt-2 truncate">${caption}</p>
       `;
 
       const imgEl = card.querySelector("img");
@@ -77,11 +82,16 @@ document.addEventListener("DOMContentLoaded", () => {
         imgEl.addEventListener("click", () => openLightbox(item));
       }
 
+      const videoEl = card.querySelector("video");
+      if (videoEl) {
+        videoEl.addEventListener("click", () => openLightbox(item));
+      }
+
       galleryGrid.appendChild(card);
     });
   }
 
-  // Lightbox
+  // Lightbox modal
   function openLightbox(item) {
     const lightbox = document.getElementById("lightbox");
     const lightboxMedia = document.getElementById("lightboxMedia");
@@ -90,23 +100,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const src = item.src || "";
     const caption = item.caption || "";
+    const type = item.type;
 
     lightbox.classList.remove("hidden");
 
-    if (src.endsWith(".mp4")) {
-      lightboxMedia.innerHTML =
-        `<video src="${src}" controls class="max-h-[80vh] max-w-[90vw] rounded shadow-lg"></video>`;
-    } else if (src.endsWith(".pdf")) {
-      lightboxMedia.innerHTML =
-        `<a href="${src}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Open PDF</a>`;
+    if (type === "VIDEO") {
+      lightboxMedia.innerHTML = `
+        <video controls class="max-h-[80vh] max-w-[90vw] rounded shadow-lg">
+          <source src="${src}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      `;
+    } else if (type === "PDF") {
+      lightboxMedia.innerHTML = `
+        <a href="${src}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline text-lg">Open PDF in New Tab</a>
+      `;
     } else {
-      lightboxMedia.innerHTML =
-        `<img src="${src}" alt="${caption}" class="max-h-[80vh] max-w-[90vw] rounded shadow-lg">`;
+      lightboxMedia.innerHTML = `
+        <img src="${src}" alt="${caption}" class="max-h-[80vh] max-w-[90vw] rounded shadow-lg object-contain">
+      `;
     }
 
     lightboxCaption.textContent = caption;
   }
 
+  // Close lightbox
   const closeBtn = document.querySelector(".close-lightbox");
   if (closeBtn) {
     closeBtn.addEventListener("click", () => {
@@ -118,7 +136,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Filter gallery using active category, year, and month selections
+  // Close lightbox when clicking outside media
+  const lightbox = document.getElementById("lightbox");
+  if (lightbox) {
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.add("hidden");
+        document.getElementById("lightboxMedia").innerHTML = "";
+      }
+    });
+  }
+
+  // Apply filters (category/year/month)
   function applyFilters() {
     const activeBtn = document.querySelector(".filter-btn.active");
     const activeCategory = activeBtn ? activeBtn.dataset.category : "all";
@@ -126,19 +155,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedMonth = monthFilter.value;
 
     const filtered = galleryData.filter(item => {
-      const matchCategory =
-        activeCategory === "all" || item.category === activeCategory;
-      const matchYear =
-        selectedYear === "all" || item.year === selectedYear;
-      const matchMonth =
-        selectedMonth === "all" || item.month === selectedMonth;
+      const matchCategory = activeCategory === "all" || item.category === activeCategory;
+      const matchYear = selectedYear === "all" || item.year === selectedYear;
+      const matchMonth = selectedMonth === "all" || item.month === selectedMonth;
       return matchCategory && matchYear && matchMonth;
     });
 
     renderGallery(filtered);
   }
 
-  // Add click handlers to filter buttons (only filtering locally)
+  // Filter buttons
   if (filterBtns && filterBtns.length > 0) {
     filterBtns.forEach(btn => {
       btn.addEventListener("click", () => {
@@ -149,9 +175,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Year and month filters
   yearFilter.addEventListener("change", applyFilters);
   monthFilter.addEventListener("change", applyFilters);
 
-  // Initial fetch and render on page load
+  // Initial fetch
   fetchGalleryItems();
 });
