@@ -1,26 +1,42 @@
 package com.tembhurni.grampanchayat.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "gallery_item")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class GalleryItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	// Metadata
 	private String title;
 	private String category;
 	private Integer year;
 	private String month;
 
-	/**
-	 * Optional: if you later move to S3/CDN, you can still use this as an external URL.
-	 * For now you may leave it null or use it as a logical path.
-	 */
+	// Now required for disk path or URL
 	private String fileUrl;
 
 	private LocalDateTime uploadTimestamp;
@@ -28,25 +44,21 @@ public class GalleryItem {
 	@Enumerated(EnumType.STRING)
 	private FileType type; // IMAGE, VIDEO, PDF
 
-	/**
-	 * Binary file content stored in the database.
-	 * For images/PDFs this maps to a PostgreSQL BYTEA column.
-	 */
+	// Optional: keep for small files only, or remove entirely once migrated
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "file_data")
 	private byte[] fileData;
 
-	/**
-	 * MIME type of the stored file, e.g. "image/jpeg", "image/png", "application/pdf".
-	 */
 	@Column(name = "content_type")
 	private String contentType;
 
-	// ===== Getters and setters =====
-
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -120,4 +132,6 @@ public class GalleryItem {
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
 	}
+
+	// getters/setters...
 }
