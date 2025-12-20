@@ -17,6 +17,7 @@ public class CorsConfig {
                         .allowedOrigins(
                                 "http://localhost:5500",
                                 "http://localhost:3000",
+                                "https://smart-gram-rwm5.onrender.com",
                                 "https://smart-gram-rwm5.onrender.com"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
