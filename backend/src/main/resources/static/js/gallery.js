@@ -18,14 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const items = await response.json();
 
+      // Map items to galleryData
       galleryData = items.map(item => ({
         id: item.id,
-        src: `/api/gallery/${item.id}/file`,
+        src: item.fileUrl || `/api/gallery/${item.id}/file`, // Use fileUrl if available
         category: (item.category || "").toLowerCase(),
         year: String(item.year || ""),
         month: (item.month || "").toLowerCase(),
         caption: item.title || "",
-        type: item.type || "IMAGE"
+        type: item.type || item.fileType || "IMAGE"
       }));
 
       applyFilters();
@@ -77,15 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="caption text-sm mt-2 truncate">${caption}</p>
       `;
 
+      // Attach click events for lightbox
       const imgEl = card.querySelector("img");
-      if (imgEl) {
-        imgEl.addEventListener("click", () => openLightbox(item));
-      }
+      if (imgEl) imgEl.addEventListener("click", () => openLightbox(item));
 
       const videoEl = card.querySelector("video");
-      if (videoEl) {
-        videoEl.addEventListener("click", () => openLightbox(item));
-      }
+      if (videoEl) videoEl.addEventListener("click", () => openLightbox(item));
 
       galleryGrid.appendChild(card);
     });
@@ -117,7 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     } else {
       lightboxMedia.innerHTML = `
-        <img src="${src}" alt="${caption}" class="max-h-[80vh] max-w-[90vw] rounded shadow-lg object-contain">
+        <img src="${src}" alt="${caption}" class="max-h-[80vh] max-w-[90vw] rounded shadow-lg object-contain"
+             onerror="this.style.display='none'; this.parentElement.innerHTML='<p class=text-gray-400>Failed to load</p>';"/>
       `;
     }
 
