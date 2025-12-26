@@ -10,6 +10,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const pdfTab = document.getElementById("pdfTab");
   const listSection = document.getElementById("listSection");
   const pdfSection = document.getElementById("pdfSection");
+  const membersData = [
+    { name: "Smt. Suraja Yogesh Bobade", post: "Sarpanch", mobile: "9970781009", photo: "/assets/images/sarpanch.jpg" },
+    { name: "Smt. Rajshree Satish Newase", post: "Up-Sarpanch", mobile: "9730822644", photo: "/assets/images/upsarpanch.jpg" },
+    { name: "Shri. Kailas Bikarji Satpute", post: "Member", mobile: "9422462254", photo: "assets/members/3.jpg" },
+    { name: "Smt. Shamal Tukaram Dokhe", post: "Member", mobile: "9423336338", photo: "assets/members/4.jpg" },
+    { name: "Shri. Hanuman Sopan Wagh", post: "Member", mobile: "7507738418", photo: "assets/members/5.jpg" },
+    { name: "Shri. Ganesh Vijay Hawaldar", post: "Member", mobile: "9011891947", photo: "assets/members/6.jpg" },
+    { name: "Smt. Muktabai Gorling Patil", post: "Member", mobile: "9960793770", photo: "assets/members/7.jpg" },
+    { name: "Smt. Vidya Shailesh Ohol", post: "Member", mobile: "9860884144", photo: "assets/members/8.jpg" },
+    { name: "Smt. Rupmati Rajaram Sherat", post: "Member", mobile: "9404690277", photo: "assets/members/9.jpg" },
+    { name: "Shri. Tribhakesh Mohan Bobade", post: "Member", mobile: "9158880900", photo: "assets/members/10.jpg" },
+    { name: "Smt. Sunanda Siddheshwar Tabe", post: "Member", mobile: "9975790551", photo: "assets/members/11.jpg" },
+    { name: "Shri. Sachin Nilkanth Hodage", post: "Member", mobile: "9850281551", photo: "assets/images/sachin.jpeg" },
+    { name: "Smt. Pratima Parameshwar Kharat", post: "Member", mobile: "8668541275", photo: "assets/members/13.jpg" },
+    { name: "Smt. Sarubai Vaibhav Deshmukh", post: "Member", mobile: "9561192525", photo: "assets/members/14.jpg" },
+    { name: "Shri. Balasaheb Anjanrao Dhonge", post: "Member", mobile: "9860360481", photo: "assets/members/15.jpg" },
+    { name: "Shri. Amar Mahadev Kamble", post: "Member", mobile: "7507574044", photo: "assets/images/amarkambale.jpeg" },
+    { name: "Smt. Aarti Lakhan Pawar", post: "Member", mobile: "9730128212", photo: "assets/members/17.jpg" },
+    { name: "Shri. Pramod Prabhakar Kute", post: "Member", mobile: "9850304551", photo: "/assets/images/pramodkute.jpeg" }
+  ];
+
 
   // 🧾 File paths (backend will replace actual data)
   const pdfPath = "assets/images/members.pdf";
@@ -100,4 +121,24 @@ document.addEventListener("DOMContentLoaded", () => {
     listTab.classList.remove("bg-indigo-600", "text-white");
     listTab.classList.add("bg-gray-200", "text-gray-700");
   });
+  // 🌟 Render members list into modal
+  membersList.innerHTML = membersData
+    .map(m => `
+      <li class="member-item">
+        <img src="${m.photo}" class="member-photo">
+
+        <div>
+          <p class="font-semibold">${m.name}</p>
+          <p>Post: ${m.post}</p>
+          <p>Mobile:
+            <a href="tel:${m.mobile}" class="text-indigo-600">
+              ${m.mobile}
+            </a>
+          </p>
+        </div>
+      </li>
+    `)
+    .join("");
+
 });
+
