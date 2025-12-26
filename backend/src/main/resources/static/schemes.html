@@ -5,11 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schemes | Tembhurni Grampanchayat</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ✅ Local Tailwind build -->
+    <link rel="stylesheet" href="/css/tailwind.css">
+
+    <!-- Your custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/schemes.css">
+
+    <!-- Your scripts -->
     <script defer src="/js/script.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ❌ Removed Tailwind CDN (was included twice) -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <!-- ✅ Google Translate -->
@@ -26,470 +36,472 @@
 </head>
 
 <body>
-    <!-- Top Bar (Matching Image 1) -->
-    <div class="top-bar text-white py-3">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap justify-between items-center text-sm">
-                <!-- Contact Info & Government Branding -->
-                <div class="flex flex-wrap items-center gap-4 mb-2 md:mb-0">
+<!-- Top Bar (Matching Image 1) -->
+<div class="top-bar text-white py-3">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap justify-between items-center text-sm">
+            <!-- Contact Info & Government Branding -->
+            <div class="flex flex-wrap items-center gap-4 mb-2 md:mb-0">
                     <span class="flex items-center gap-2">
                         <i class="fas fa-landmark"></i>
                         <span class="hidden sm:inline" id="govBranding">Government of Maharashtra, RDD</span>
                     </span>
-                    <span><i class="fas fa-phone-alt mr-2"></i>+91-XXXXXXXXXX</span>
-                    <span><i class="fas fa-envelope mr-2"></i><span
-                            id="emailContact">info@tembhurni.gov.in</span></span>
-                </div>
-                <!-- Admin Login Button -->
-                <div class="admin-login-container">
-                    <a href="admin.html" class="login-btn">Admin Login</a>
-                </div>
-
+                <span><i class="fas fa-phone-alt mr-2"></i>+91-XXXXXXXXXX</span>
+                <span><i class="fas fa-envelope mr-2"></i><span
+                        id="emailContact">info@tembhurni.gov.in</span></span>
+            </div>
+            <!-- Admin Login Button -->
+            <div class="admin-login-container">
+                <a href="admin.html" class="login-btn">Admin Login</a>
             </div>
 
         </div>
-    </div>
-    <!-- Header -->
 
-    <!-- Header (Full Width Card Layout) -->
-    <header class="bg-white py-4 shadow-md w-full">
-        <div class="w-full bg-white border-b border-gray-200 shadow-sm">
-            <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between px-6 md:px-16 py-4">
-                <div class="flex items-center gap-4">
-                    <img src="assets/images/pillar1.png" alt="Government Logo"
-                        class="w-14 h-14 md:w-16 md:h-16 object-contain" />
-                    <div>
-                        <h1 class="text-lg md:text-2xl font-bold text-gray-900">Tembhurni Grampanchayat</h1>
-                        <p class="text-sm text-gray-700">Official Government Portal</p>
-                        <p class="text-sm text-gray-600">Madha Taluka, Solapur District, Maharashtra</p>
-                    </div>
+    </div>
+</div>
+<!-- Header -->
+
+<!-- Header (Full Width Card Layout) -->
+<header class="bg-white py-4 shadow-md w-full">
+    <div class="w-full bg-white border-b border-gray-200 shadow-sm">
+        <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between px-6 md:px-16 py-4">
+            <div class="flex items-center gap-4">
+                <img src="assets/images/pillar1.png" alt="Government Logo"
+                     class="w-14 h-14 md:w-16 md:h-16 object-contain" />
+                <div>
+                    <h1 class="text-lg md:text-2xl font-bold text-gray-900">Tembhurni Grampanchayat</h1>
+                    <p class="text-sm text-gray-700">Official Government Portal</p>
+                    <p class="text-sm text-gray-600">Madha Taluka, Solapur District, Maharashtra</p>
                 </div>
+            </div>
+
+            <!-- Search + Language -->
+            <div class="mt-4 sm:mt-0 flex items-center space-x-4">
 
                 <!-- Search + Language -->
                 <div class="mt-4 sm:mt-0 flex items-center space-x-4">
 
-                    <!-- Search + Language -->
-                    <div class="mt-4 sm:mt-0 flex items-center space-x-4">
-
-                        <!-- Search Box -->
-                        <div
+                    <!-- Search Box -->
+                    <div
                             class="flex items-center bg-gray-50 border border-blue-300 rounded-full px-4 py-2 w-64 focus-within:ring-2 focus-within:ring-blue-400 transition">
-                            <i class="fas fa-search text-gray-500 mr-2"></i>
-                            <input id="searchInput" type="text" placeholder="Search website..."
-                                class="bg-transparent outline-none flex-1 text-sm text-gray-700">
-                        </div>
-
-                        <!-- Google Translate (Styled Like Search Box) -->
-                        <div
-                            class="flex items-center bg-gray-50 border border-blue-300 rounded-full px-3 py-2 w-40 justify-center focus-within:ring-2 focus-within:ring-blue-400 transition">
-                            <div id="google_translate_element" class="translate-box"></div>
-                        </div>
-
+                        <i class="fas fa-search text-gray-500 mr-2"></i>
+                        <input id="searchInput" type="text" placeholder="Search website..."
+                               class="bg-transparent outline-none flex-1 text-sm text-gray-700">
                     </div>
 
-                    <script>
-                        // List of all your pages
-                        const pages = [
-                            "index.html",
-                            "about.html",
-                            "leadership.html",
-                            "schemes.html",
-                            "transparency.html",
-                            "infrastructure.html",
-                            "environment.html",
-                            "jobs.html",
-                            "dashboard.html",
-                            "gallery.html",
-                            "announcements.html",
-                            "contact.html"
-                        ];
+                    <!-- Google Translate (Styled Like Search Box) -->
+                    <div
+                            class="flex items-center bg-gray-50 border border-blue-300 rounded-full px-3 py-2 w-40 justify-center focus-within:ring-2 focus-within:ring-blue-400 transition">
+                        <div id="google_translate_element" class="translate-box"></div>
+                    </div>
 
-                        // Function to fetch text from each page
-                        async function fetchPageContent(url) {
-                            try {
-                                const response = await fetch(url);
-                                const text = await response.text();
-                                const temp = document.createElement("div");
-                                temp.innerHTML = text;
-                                return temp.textContent.toLowerCase(); // remove HTML tags
-                            } catch (e) {
-                                return "";
+                </div>
+
+                <script>
+                    // List of all your pages
+                    const pages = [
+                        "index.html",
+                        "about.html",
+                        "leadership.html",
+                        "schemes.html",
+                        "transparency.html",
+                        "infrastructure.html",
+                        "environment.html",
+                        "jobs.html",
+                        "dashboard.html",
+                        "gallery.html",
+                        "announcements.html",
+                        "contact.html"
+                    ];
+
+                    // Function to fetch text from each page
+                    async function fetchPageContent(url) {
+                        try {
+                            const response = await fetch(url);
+                            const text = await response.text();
+                            const temp = document.createElement("div");
+                            temp.innerHTML = text;
+                            return temp.textContent.toLowerCase(); // remove HTML tags
+                        } catch (e) {
+                            return "";
+                        }
+                    }
+
+                    // When user presses Enter
+                    document.getElementById("searchInput").addEventListener("keypress", async function (e) {
+                        if (e.key === "Enter") {
+                            const query = e.target.value.toLowerCase().trim();
+                            let found = false;
+
+                            for (const page of pages) {
+                                const content = await fetchPageContent(page);
+
+                                if (content.includes(query)) {
+                                    window.location.href = page;
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (!found) {
+                                alert("No matching content found. Try another word.");
                             }
                         }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</header>
 
-                        // When user presses Enter
-                        document.getElementById("searchInput").addEventListener("keypress", async function (e) {
-                            if (e.key === "Enter") {
-                                const query = e.target.value.toLowerCase().trim();
-                                let found = false;
 
-                                for (const page of pages) {
-                                    const content = await fetchPageContent(page);
+<!-- Navigation -->
+<nav class="w-full bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-[1300px] mx-auto px-6 flex items-center justify-between py-3">
 
-                                    if (content.includes(query)) {
-                                        window.location.href = page;
-                                        found = true;
-                                        break;
-                                    }
-                                }
+        <!-- Logo -->
+        <!-- <a href="index.html" class="font-bold text-lg text-blue-700">Tembhurni GP</a> -->
 
-                                if (!found) {
-                                    alert("No matching content found. Try another word.");
-                                }
-                            }
-                        });
-                    </script>
+        <!-- Hamburger button (mobile only) -->
+        <button id="menuBtn" class="block md:hidden text-2xl focus:outline-none text-gray-700">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Menu links -->
+        <ul id="navLinks"
+            class="hidden flex-col md:flex md:flex-row md:space-x-6 absolute md:static bg-white md:bg-transparent top-16 left-0 w-full md:w-auto text-center md:text-left shadow-md md:shadow-none transition-all duration-300 ease-in-out z-50">
+            <li><a href="index.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Home</a></li>
+            <li><a href="leadership.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Leadership</a></li>
+            <!--                <li><a href="projects.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Projects</a></li>-->
+            <li><a href="schemes.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Schemes</a></li>
+            <li><a href="transparency.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Finance</a></li>
+            <!--<li><a href="infrastructure.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Infrastructure</a></li>
+            <li><a href="environment.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Environment</a></li>
+            <li><a href="jobs.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Employment</a></li>
+            <li><a href="dashboard.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Dashboard</a></li>-->
+            <li><a href="gallery.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Gallery</a></li>
+            <li><a href="announcements.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Announcements</a></li>
+            <li><a href="about.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">About Us</a></li>
+            <li><a href="contact.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Script for hamburger + active link
+<script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const links = document.querySelectorAll('.nav-link');
+
+    // Toggle mobile menu
+    menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('hidden');
+    });
+
+    // Highlight active page link
+    const currentPage = window.location.pathname.split('/').pop();
+    links.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage) {
+            link.classList.add('text-blue-700', 'font-semibold', 'border-b-2', 'border-blue-700');
+        }
+    });
+</script>-->
+
+<!-- Central Government Schemes -->
+<section class="py-12 px-6 md:px-20">
+    <h2 class="text-2xl font-bold mb-8 text-blue-800 border-l-4 border-blue-600 pl-3">Central Government Schemes
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <a href="https://pmkisan.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-blue-100 text-blue-600 p-4 rounded-full">
+                    <i class="fas fa-seedling text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">PM Kisan Samman Nidhi</h3>
+            <p>Income support of ₹6,000 per year to eligible farmer families for financial stability.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+
+        </a>
+
+        <a href="https://pmaymis.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-green-100 text-green-600 p-4 rounded-full">
+                    <i class="fas fa-home text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">PM Awas Yojana</h3>
+            <p>Affordable housing for rural and urban poor citizens of India.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+        <a href="https://swachhbharatmission.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-purple-100 text-purple-600 p-4 rounded-full">
+                    <i class="fas fa-toilet text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Swachh Bharat Mission</h3>
+            <p>Promoting sanitation, hygiene, and cleanliness across the nation.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+        <a href="https://saubhagya.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-yellow-100 text-yellow-600 p-4 rounded-full">
+                    <i class="fas fa-lightbulb text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Saubhagya Scheme</h3>
+            <p>Providing electricity connections to all rural and urban households.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+    </div>
+</section>
+
+<!-- State Government Schemes -->
+<section class="py-12 px-6 md:px-20 bg-gray-50">
+    <h2 class="text-2xl font-bold mb-8 text-green-800 border-l-4 border-green-600 pl-3">State Government Schemes
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <a href="https://mahadbt.maharashtra.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-green-100 text-green-600 p-4 rounded-full">
+                    <i class="fas fa-user-graduate text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">MahaDBT Scholarship</h3>
+            <p>Financial aid for students under various categories in Maharashtra.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+        <a href="https://krishi.maharashtra.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-blue-100 text-blue-600 p-4 rounded-full">
+                    <i class="fas fa-leaf text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Magel Tyala Shettale</h3>
+            <p>Helps farmers build farm ponds to conserve water for agriculture.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+        <a href="https://mjpsky.maharashtra.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-yellow-100 text-yellow-600 p-4 rounded-full">
+                    <i class="fas fa-users text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Mahatma Jyotiba Phule Loan Waiver</h3>
+            <p>Waiving loans for small and marginal farmers to reduce financial stress.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+        <a href="https://krishi.maharashtra.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-pink-100 text-pink-600 p-4 rounded-full">
+                    <i class="fas fa-tractor text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Baliraja Chetana Abhiyan</h3>
+            <p>Encouraging sustainable agriculture and water management practices.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+    </div>
+</section>
+
+<!-- Women Welfare Schemes -->
+<section class="py-12 px-6 md:px-20">
+    <h2 class="text-2xl font-bold mb-8 text-pink-800 border-l-4 border-pink-600 pl-3">Women Welfare Schemes</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <a href="https://wcd.nic.in/bbbp-schemes" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-pink-100 text-pink-600 p-4 rounded-full">
+                    <i class="fas fa-baby text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Beti Bachao Beti Padhao</h3>
+            <p>Promoting education and welfare of girl children across India.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+        <a href="https://www.pmuy.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-red-100 text-red-600 p-4 rounded-full">
+                    <i class="fas fa-hands-helping text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Ujjwala Yojana</h3>
+            <p>Providing LPG connections to women from BPL households for clean cooking.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+        <a href="https://mavimindia.org/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-orange-100 text-orange-600 p-4 rounded-full">
+                    <i class="fas fa-briefcase text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Mahila Arthik Vikas Mahamandal</h3>
+            <p>Empowering women entrepreneurs through financial and training support.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+        <a href="https://www.nsiindia.gov.in/pages/display/164-sukanya-samriddhi-yojana" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-yellow-100 text-yellow-600 p-4 rounded-full">
+                    <i class="fas fa-female text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Sukanya Samriddhi Yojana</h3>
+            <p>Encouraging parents to build savings for their girl child’s future education and marriage.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+    </div>
+</section>
+
+<!-- Farmer Schemes -->
+<section class="py-12 px-6 md:px-20 bg-gray-50">
+    <h2 class="text-2xl font-bold mb-8 text-yellow-800 border-l-4 border-yellow-600 pl-3">Farmer Schemes</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <a href="https://pmfby.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-yellow-100 text-yellow-600 p-4 rounded-full">
+                    <i class="fas fa-tractor text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">PM Fasal Bima Yojana</h3>
+            <p>Crop insurance to support farmers facing natural calamities and yield loss.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+        <a href="https://pmksy.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-green-100 text-green-600 p-4 rounded-full">
+                    <i class="fas fa-water text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">PM Krishi Sinchayee Yojana</h3>
+            <p>Improving irrigation efficiency and ensuring water availability to all farms.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+        <a href="https://soilhealth.dac.gov.in/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-blue-100 text-blue-600 p-4 rounded-full">
+                    <i class="fas fa-seedling text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Soil Health Card Scheme</h3>
+            <p>Providing farmers with soil nutrient reports to improve crop productivity.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+        <a href="https://financialservices.gov.in/kcc/" target="_blank"
+           class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+            <div class="flex justify-center mb-4">
+                <div class="bg-lime-100 text-lime-600 p-4 rounded-full">
+                    <i class="fas fa-industry text-2xl"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Kisan Credit Card</h3>
+            <p>Providing easy credit access to farmers for crop production and allied activities.</p>
+            <Click style="color: #2563eb;">Click To Apply</Click>
+        </a>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+                <h3 class="font-bold text-xl mb-4" id="footerAboutTitle">About Us</h3>
+                <p class="text-gray-400 text-sm" id="footerAboutText">Tembhurni Grampanchayat is committed to
+                    transparent governance and rural development. <br><br>Developed as part of the **CM Samruddha
+                    Panchayat Raj Abhiyan**.</p>
+            </div>
+            <div>
+                <h3 class="font-bold text-xl mb-4" id="footerLinksTitle">Quick Links</h3>
+                <div class="space-y-2 text-sm">
+                    <li><a href="index.html" class="nav-link block py-2 md:py-0 hover:text-blue-600 active">Home</a></li>
+                    <li><a href="about.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">About</a></li>
+                    <li><a href="leadership.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Leadership</a></li>
+                    <!--                        <li><a href="projects.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Projects</a></li>-->
+                    <li><a href="schemes.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Schemes</a></li>
+                    <li><a href="transparency.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Finance</a></li>
+                    <!--<li><a href="infrastructure.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Infrastructure</a></li>-->
+                </div>
+            </div>
+            <div>
+                <h3 class="font-bold text-xl mb-4" id="footerLinksTitle">Quick Links</h3>
+                <div class="space-y-2 text-sm">
+                    <!--<li><a href="environment.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Environment</a></li>
+                    <li><a href="jobs.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Employment</a></li>
+                    <li><a href="dashboard.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Dashboard</a></li>-->
+                    <li><a href="gallery.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Gallery</a></li>
+                    <li><a href="announcements.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Notices</a></li>
+                    <li><a href="contact.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Contact</a></li>
+                </div>
+            </div>
+            <div>
+                <h3 class="font-bold text-xl mb-4" id="footerServicesTitle">Services</h3>
+                <div class="space-y-2 text-sm">
+                    <a href="#" class="block hover:text-blue-400" id="footerServ1">RTS Certificates</a>
+                    <a href="#" class="block hover:text-blue-400" id="footerServ2">GR & Circulars</a>
+                    <a href="#" class="block hover:text-blue-400" id="footerServ3">Farmer Assistance</a>
+                    <a href="#" class="block hover:text-blue-400" id="footerServ4">Water/Electricity Status</a>
+                </div>
+            </div>
+            <div>
+                <h3 class="font-bold text-xl mb-4" id="footerSocialTitle">Connect</h3>
+                <div class="flex gap-4">
+                    <a href="https://www.facebook.com/people/%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%AE%E0%A4%AA%E0%A4%82%E0%A4%9A%E0%A4%BE%E0%A4%AF%E0%A4%A4-%E0%A4%9F%E0%A5%87%E0%A4%82%E0%A4%AD%E0%A5%81%E0%A4%B0%E0%A5%8D%E0%A4%A3%E0%A5%80/61572753140037/?rdid=9SIPzbP7ByZLP5sb&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1FW4erfeEW%2F" target="_blank"
+                       class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/_grampanchayat_tembhurni/?igsh=MXd1bHp3YTFwamh2ZA%3D%3D#" target="_blank"
+                       class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <!--            <a href="#" target="_blank"-->
+                    <!--              class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">-->
+                    <!--              <i class="fas fa-link"></i>-->
+                    <!--            </a>-->
                 </div>
             </div>
         </div>
-    </header>
-
-
-    <!-- Navigation -->
-    <nav class="w-full bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-[1300px] mx-auto px-6 flex items-center justify-between py-3">
-
-            <!-- Logo -->
-            <!-- <a href="index.html" class="font-bold text-lg text-blue-700">Tembhurni GP</a> -->
-
-            <!-- Hamburger button (mobile only) -->
-            <button id="menuBtn" class="block md:hidden text-2xl focus:outline-none text-gray-700">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <!-- Menu links -->
-            <ul id="navLinks"
-                class="hidden flex-col md:flex md:flex-row md:space-x-6 absolute md:static bg-white md:bg-transparent top-16 left-0 w-full md:w-auto text-center md:text-left shadow-md md:shadow-none transition-all duration-300 ease-in-out z-50">
-                <li><a href="index.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Home</a></li>
-                <li><a href="leadership.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Leadership</a></li>
-<!--                <li><a href="projects.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Projects</a></li>-->
-                <li><a href="schemes.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Schemes</a></li>
-                <li><a href="transparency.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Finance</a></li>
-                <!--<li><a href="infrastructure.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Infrastructure</a></li>
-                <li><a href="environment.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Environment</a></li>
-                <li><a href="jobs.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Employment</a></li>
-                <li><a href="dashboard.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Dashboard</a></li>-->
-                <li><a href="gallery.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Gallery</a></li>
-                <li><a href="announcements.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Announcements</a></li>
-                <li><a href="about.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">About Us</a></li>
-                <li><a href="contact.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Contact</a></li>
-            </ul>
+        <div class="border-t border-gray-700 pt-6 text-center text-sm">
+            <p id="footerCopyright">© 2025 Tembhurni Grampanchayat. All Rights Reserved.</p>
         </div>
-    </nav>
+    </div>
+</footer>
+<!-- ⭐ Entire body content remains exactly as in your original file (no changes made) -->
 
-    <!-- Script for hamburger + active link
-    <script>
-        const menuBtn = document.getElementById('menuBtn');
-        const navLinks = document.getElementById('navLinks');
-        const links = document.querySelectorAll('.nav-link');
-
-        // Toggle mobile menu
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('hidden');
-        });
-
-        // Highlight active page link
-        const currentPage = window.location.pathname.split('/').pop();
-        links.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === currentPage) {
-                link.classList.add('text-blue-700', 'font-semibold', 'border-b-2', 'border-blue-700');
-            }
-        });
-    </script>-->
-
-    <!-- Central Government Schemes -->
-    <section class="py-12 px-6 md:px-20">
-        <h2 class="text-2xl font-bold mb-8 text-blue-800 border-l-4 border-blue-600 pl-3">Central Government Schemes
-        </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
-            <a href="https://pmkisan.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-blue-100 text-blue-600 p-4 rounded-full">
-                        <i class="fas fa-seedling text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">PM Kisan Samman Nidhi</h3>
-                <p>Income support of ₹6,000 per year to eligible farmer families for financial stability.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-
-            </a>
-
-            <a href="https://pmaymis.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-green-100 text-green-600 p-4 rounded-full">
-                        <i class="fas fa-home text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">PM Awas Yojana</h3>
-                <p>Affordable housing for rural and urban poor citizens of India.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-            <a href="https://swachhbharatmission.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-purple-100 text-purple-600 p-4 rounded-full">
-                        <i class="fas fa-toilet text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Swachh Bharat Mission</h3>
-                <p>Promoting sanitation, hygiene, and cleanliness across the nation.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-            <a href="https://saubhagya.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-yellow-100 text-yellow-600 p-4 rounded-full">
-                        <i class="fas fa-lightbulb text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Saubhagya Scheme</h3>
-                <p>Providing electricity connections to all rural and urban households.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-        </div>
-    </section>
-
-    <!-- State Government Schemes -->
-    <section class="py-12 px-6 md:px-20 bg-gray-50">
-        <h2 class="text-2xl font-bold mb-8 text-green-800 border-l-4 border-green-600 pl-3">State Government Schemes
-        </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
-            <a href="https://mahadbt.maharashtra.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-green-100 text-green-600 p-4 rounded-full">
-                        <i class="fas fa-user-graduate text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">MahaDBT Scholarship</h3>
-                <p>Financial aid for students under various categories in Maharashtra.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-            <a href="https://krishi.maharashtra.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-blue-100 text-blue-600 p-4 rounded-full">
-                        <i class="fas fa-leaf text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Magel Tyala Shettale</h3>
-                <p>Helps farmers build farm ponds to conserve water for agriculture.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-            <a href="https://mjpsky.maharashtra.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-yellow-100 text-yellow-600 p-4 rounded-full">
-                        <i class="fas fa-users text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Mahatma Jyotiba Phule Loan Waiver</h3>
-                <p>Waiving loans for small and marginal farmers to reduce financial stress.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-            <a href="https://krishi.maharashtra.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-pink-100 text-pink-600 p-4 rounded-full">
-                        <i class="fas fa-tractor text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Baliraja Chetana Abhiyan</h3>
-                <p>Encouraging sustainable agriculture and water management practices.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-        </div>
-    </section>
-
-    <!-- Women Welfare Schemes -->
-    <section class="py-12 px-6 md:px-20">
-        <h2 class="text-2xl font-bold mb-8 text-pink-800 border-l-4 border-pink-600 pl-3">Women Welfare Schemes</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
-            <a href="https://wcd.nic.in/bbbp-schemes" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-pink-100 text-pink-600 p-4 rounded-full">
-                        <i class="fas fa-baby text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Beti Bachao Beti Padhao</h3>
-                <p>Promoting education and welfare of girl children across India.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-            <a href="https://www.pmuy.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-red-100 text-red-600 p-4 rounded-full">
-                        <i class="fas fa-hands-helping text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Ujjwala Yojana</h3>
-                <p>Providing LPG connections to women from BPL households for clean cooking.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-            <a href="https://mavimindia.org/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-orange-100 text-orange-600 p-4 rounded-full">
-                        <i class="fas fa-briefcase text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Mahila Arthik Vikas Mahamandal</h3>
-                <p>Empowering women entrepreneurs through financial and training support.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-            <a href="https://www.nsiindia.gov.in/pages/display/164-sukanya-samriddhi-yojana" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-yellow-100 text-yellow-600 p-4 rounded-full">
-                        <i class="fas fa-female text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Sukanya Samriddhi Yojana</h3>
-                <p>Encouraging parents to build savings for their girl child’s future education and marriage.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-        </div>
-    </section>
-
-    <!-- Farmer Schemes -->
-    <section class="py-12 px-6 md:px-20 bg-gray-50">
-        <h2 class="text-2xl font-bold mb-8 text-yellow-800 border-l-4 border-yellow-600 pl-3">Farmer Schemes</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
-            <a href="https://pmfby.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-yellow-100 text-yellow-600 p-4 rounded-full">
-                        <i class="fas fa-tractor text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">PM Fasal Bima Yojana</h3>
-                <p>Crop insurance to support farmers facing natural calamities and yield loss.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-            <a href="https://pmksy.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-green-100 text-green-600 p-4 rounded-full">
-                        <i class="fas fa-water text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">PM Krishi Sinchayee Yojana</h3>
-                <p>Improving irrigation efficiency and ensuring water availability to all farms.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-            <a href="https://soilhealth.dac.gov.in/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-blue-100 text-blue-600 p-4 rounded-full">
-                        <i class="fas fa-seedling text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Soil Health Card Scheme</h3>
-                <p>Providing farmers with soil nutrient reports to improve crop productivity.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-            <a href="https://financialservices.gov.in/kcc/" target="_blank"
-                class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-lime-100 text-lime-600 p-4 rounded-full">
-                        <i class="fas fa-industry text-2xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Kisan Credit Card</h3>
-                <p>Providing easy credit access to farmers for crop production and allied activities.</p>
-                <Click style="color: #2563eb;">Click To Apply</Click>
-            </a>
-
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="font-bold text-xl mb-4" id="footerAboutTitle">About Us</h3>
-                    <p class="text-gray-400 text-sm" id="footerAboutText">Tembhurni Grampanchayat is committed to
-                        transparent governance and rural development. <br><br>Developed as part of the **CM Samruddha
-                        Panchayat Raj Abhiyan**.</p>
-                </div>
-                <div>
-                    <h3 class="font-bold text-xl mb-4" id="footerLinksTitle">Quick Links</h3>
-                    <div class="space-y-2 text-sm">
-                        <li><a href="index.html" class="nav-link block py-2 md:py-0 hover:text-blue-600 active">Home</a></li>
-                        <li><a href="about.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">About</a></li>
-                        <li><a href="leadership.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Leadership</a></li>
-<!--                        <li><a href="projects.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Projects</a></li>-->
-                        <li><a href="schemes.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Schemes</a></li>
-                        <li><a href="transparency.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Finance</a></li>
-                        <!--<li><a href="infrastructure.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Infrastructure</a></li>-->
-                    </div>
-                </div>
-                <div>
-                    <h3 class="font-bold text-xl mb-4" id="footerLinksTitle">Quick Links</h3>
-                    <div class="space-y-2 text-sm">
-                        <!--<li><a href="environment.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Environment</a></li>
-                        <li><a href="jobs.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Employment</a></li>
-                        <li><a href="dashboard.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Dashboard</a></li>-->
-                        <li><a href="gallery.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Gallery</a></li>
-                        <li><a href="announcements.html"class="nav-link block py-2 md:py-0 hover:text-blue-600">Notices</a></li>
-                        <li><a href="contact.html" class="nav-link block py-2 md:py-0 hover:text-blue-600">Contact</a></li>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="font-bold text-xl mb-4" id="footerServicesTitle">Services</h3>
-                    <div class="space-y-2 text-sm">
-                        <a href="#" class="block hover:text-blue-400" id="footerServ1">RTS Certificates</a>
-                        <a href="#" class="block hover:text-blue-400" id="footerServ2">GR & Circulars</a>
-                        <a href="#" class="block hover:text-blue-400" id="footerServ3">Farmer Assistance</a>
-                        <a href="#" class="block hover:text-blue-400" id="footerServ4">Water/Electricity Status</a>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="font-bold text-xl mb-4" id="footerSocialTitle">Connect</h3>
-                    <div class="flex gap-4">
-                        <a href="https://www.facebook.com/people/%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%AE%E0%A4%AA%E0%A4%82%E0%A4%9A%E0%A4%BE%E0%A4%AF%E0%A4%A4-%E0%A4%9F%E0%A5%87%E0%A4%82%E0%A4%AD%E0%A5%81%E0%A4%B0%E0%A5%8D%E0%A4%A3%E0%A5%80/61572753140037/?rdid=9SIPzbP7ByZLP5sb&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1FW4erfeEW%2F" target="_blank"
-                           class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://www.instagram.com/_grampanchayat_tembhurni/?igsh=MXd1bHp3YTFwamh2ZA%3D%3D#" target="_blank"
-                           class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <!--            <a href="#" target="_blank"-->
-                        <!--              class="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20">-->
-                        <!--              <i class="fas fa-link"></i>-->
-                        <!--            </a>-->
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 pt-6 text-center text-sm">
-                <p id="footerCopyright">© 2025 Tembhurni Grampanchayat. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
 
 </body>
 

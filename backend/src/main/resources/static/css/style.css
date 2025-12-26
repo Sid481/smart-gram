@@ -37,18 +37,20 @@ header input::placeholder {
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg,
-      /* diagonal direction from top-left to bottom-right */
-      #ff9933 0%,
-      /* saffron start */
-      #ffffff 45%,
-      /* white middle */
-      #138808 90%
-      /* green end */
-    );
+  width: 100%;
+  min-width: 100vw;
+  min-height: 85vh;
   position: relative;
   overflow: hidden;
+
+  background-image: url('/assets/images/gp.jpg');
+  background-size: cover;          /* 🔥 shows full image */
+  background-position: center;
+  background-repeat: no-repeat;      /* avoids tiling */
+  background-color: #000;            /* or white background */
 }
+
+
 
 /* Added for black text in hero section */
 .hero-content h1 {
@@ -63,6 +65,35 @@ header input::placeholder {
   position: relative;
   z-index: 10;
 }
+
+/* 1️⃣ Medium height override (smaller hero) */
+
+
+/* 2️⃣ Better text contrast on image */
+.hero-content h1,
+.hero-content p {
+  color: #ffffff;        /* white text */
+}
+
+/* 3️⃣ Overlay for readability */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);  /* dark overlay */
+  z-index: 1;
+}
+
+/* 4️⃣ Ensure hero text stays above overlay */
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+/* move hero text slightly downward */
+.hero-content {
+  margin-top: 60px;     /* adjust: 40, 60, 80 as you like */
+}
+
 
 .card {
   background: white;
@@ -346,3 +377,50 @@ html, body {
     display: flex !important;
   }
 }*/
+
+/* --- Panchayat Members list passport style --- */
+
+.member-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f8fafc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.member-photo {
+  width: 60px;
+  height: 70px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+/* 📜 Scroll area in members list */
+#membersList {
+  max-height: 380px;     /* scrolling height */
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* 🪪 each member box */
+.member-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: #f8fafc;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+/* 🖼️ Passport-size photo */
+.member-photo {
+  width: 70px;
+  height: 90px;      /* passport ratio 3:4 */
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid #ddd;
+}
