@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/admin")
 public class AdminAuthController {
 
-    @Value("${ADMIN_PASSWORD}")
+    @Value("${app.admin.password}")
     private String adminPassword;
 
     @PostMapping("/login")

@@ -18,10 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const monthSelect = document.getElementById("monthSelect");
   const fileInput = document.getElementById("fileInput");
 
-  // 🚫 NO HARDCODED PASSWORD ANYMORE
-  // TEMP DEV PASSWORD – move to backend for real security
-  
-
   // ✅ Maintain session using localStorage
   if (localStorage.getItem("isAdminLoggedIn") === "true") {
     showAdminPanel();
