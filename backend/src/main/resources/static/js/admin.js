@@ -18,21 +18,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const monthSelect = document.getElementById("monthSelect");
   const fileInput = document.getElementById("fileInput");
 
+  // 🚫 NO HARDCODED PASSWORD ANYMORE
   // TEMP DEV PASSWORD – move to backend for real security
-  const ADMIN_PASSWORD = "smartgram123";
+  //const ADMIN_PASSWORD = "smartgram123";
 
   // ✅ Maintain session using localStorage
   if (localStorage.getItem("isAdminLoggedIn") === "true") {
     showAdminPanel();
   }
 
+  // 🔐 LOGIN — ask backend to verify password
   if (loginBtn && adminPassword && loginMessage) {
-    loginBtn.addEventListener("click", () => {
-      if (adminPassword.value === ADMIN_PASSWORD) {
+    loginBtn.addEventListener("click", async () => {
+
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          password: adminPassword.value
+        })
+      });
+
+      if (res.ok) {
         loginMessage.textContent = "✅ Access Granted!";
         loginMessage.style.color = "green";
         localStorage.setItem("isAdminLoggedIn", "true");
-
         setTimeout(showAdminPanel, 700);
       } else {
         loginMessage.textContent = "❌ Incorrect Password!";
@@ -116,54 +127,38 @@ document.addEventListener("DOMContentLoaded", () => {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("category", category);
-      formData.append("title", file.name); // You can add a separate title input if needed
+      formData.append("title", file.name);
       formData.append("year", year);
       formData.append("month", month);
       formData.append("type", type);
 
       try {
-        if (uploadMessage) {
-          uploadMessage.textContent = "⬆️ Uploading...";
-          uploadMessage.style.color = "#1d4ed8";
-        }
+        uploadMessage.textContent = "⬆️ Uploading...";
+        uploadMessage.style.color = "#1d4ed8";
 
-        // ✅ Relative URL for single-port Spring Boot
         const response = await fetch("/api/gallery/upload", {
           method: "POST",
           body: formData,
-          credentials: "include" // important if backend uses session cookies
+          credentials: "include"
         });
 
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(errorText || "Upload failed");
-        }
+        if (!response.ok) throw new Error(await response.text());
 
-        const result = await response.json();
-        if (uploadMessage) {
-          uploadMessage.textContent = "✅ Upload successful!";
-          uploadMessage.style.color = "green";
-        }
+        uploadMessage.textContent = "✅ Upload successful!";
+        uploadMessage.style.color = "green";
 
-        // Optionally, clear the inputs or refresh preview here
         if (fileInput) fileInput.value = "";
         if (categorySelect) categorySelect.value = "";
         if (pageSelect) pageSelect.value = "";
         if (yearSelect) yearSelect.value = "all";
         if (monthSelect) monthSelect.value = "all";
-
-        // TODO: call a function here to refresh preview list if you have one
-        // refreshPreview();
       } catch (error) {
-        if (uploadMessage) {
-          uploadMessage.textContent = "❌ " + error.message;
-          uploadMessage.style.color = "red";
-        }
+        uploadMessage.textContent = "❌ " + error.message;
+        uploadMessage.style.color = "red";
       }
     });
   }
 
-  // Helper to determine file type string for backend enum
   function getFileType(file) {
     if (!file) return "";
     const mime = file.type;
@@ -172,4 +167,4 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mime.startsWith("video/")) return "VIDEO";
     return "";
   }
-});
+})
