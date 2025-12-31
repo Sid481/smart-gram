@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🚫 NO HARDCODED PASSWORD ANYMORE
   // TEMP DEV PASSWORD – move to backend for real security
-  //const ADMIN_PASSWORD = "smartgram123";
+  
 
   // ✅ Maintain session using localStorage
   if (localStorage.getItem("isAdminLoggedIn") === "true") {
