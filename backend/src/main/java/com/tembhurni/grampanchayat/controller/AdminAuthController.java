@@ -1,4 +1,4 @@
-package com.tembhurni.grampanchayat.controller;
+/*package com.tembhurni.grampanchayat.controller;
 
 import java.util.Map;
 
@@ -28,5 +28,5 @@ public class AdminAuthController {
         return ResponseEntity.status(401).body("INVALID PASSWORD");
     }
 }
-
+*/
 
