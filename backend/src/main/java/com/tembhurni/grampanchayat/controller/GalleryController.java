@@ -45,7 +45,7 @@ public class GalleryController {
      */
     @GetMapping("/recent")
     public ResponseEntity<List<GalleryItem>> getRecentGalleryItems(
-            @RequestParam(defaultValue = "10") int limit) {
+            @RequestParam(defaultValue = "20") int limit) {
         try {
             System.out.println("📥 GET /recent (limit: " + limit + ")");
             List<GalleryItem> items = galleryService.getRecentItems(limit);
